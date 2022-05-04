@@ -1,10 +1,11 @@
 import React from 'react';
-import { Ticket } from '../Ticket';
+
+import { TicketList } from '../TicketList';
 
 function App() {
   return (
-    <div className="App">
-      <Ticket/>
+    <div className='App'>
+      <TicketList />
     </div>
   );
 }
