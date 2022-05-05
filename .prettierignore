@@ -1,0 +1,8 @@
+node_modules
+public
+package.json
+package-lock.json
+.prettierrc
+.eslintrc.json
+README.md
+tsconfig.json
