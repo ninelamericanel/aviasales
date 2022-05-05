@@ -2,6 +2,8 @@ import React, { FC } from 'react';
 
 import { Ticket } from '../Ticket';
 
+import classes from './TicketList.module.scss';
+
 const TicketList: FC = () => {
   const arr = [
     {
@@ -118,27 +120,29 @@ const TicketList: FC = () => {
 
   return (
     <>
-      <div className="filter">
-        <form>
-          <label>КОЛИЧЕСТВО ПЕРЕСАДОК</label>
-          <label>
-            <input type="checkbox"></input>
-            Все
-          </label>
-          <label>
-            <input type="checkbox"></input>
-            Без пересадок
-          </label>
-          <label>
-            <input type="checkbox"></input>1 пересадка
-          </label>
-          <label>
-            <input type="checkbox"></input>2 пересадки
-          </label>
-          <label>
-            <input type="checkbox"></input>3 пересадки
-          </label>
-        </form>
+      <div className={classes.filter}>
+        {/*<form>*/}
+        <div className={classes.header}>
+          <p>КОЛИЧЕСТВО ПЕРЕСАДОК</p>
+        </div>
+        <label className={classes.label}>
+          <input className={classes.checkbox} type="checkbox"></input>
+          Все
+        </label>
+        <label className={classes.label}>
+          <input className={classes.checkbox} type="checkbox"></input>
+          Без пересадок
+        </label>
+        <label className={classes.label}>
+          <input className={classes.checkbox} type="checkbox"></input>1 пересадка
+        </label>
+        <label className={classes.label}>
+          <input className={classes.checkbox} type="checkbox"></input>2 пересадки
+        </label>
+        <label className={classes.label}>
+          <input className={classes.checkbox} type="checkbox"></input>3 пересадки
+        </label>
+        {/*</form>*/}
       </div>
       <div className="main">
         <div className="tabs">

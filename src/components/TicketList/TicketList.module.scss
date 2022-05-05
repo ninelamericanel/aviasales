@@ -1,0 +1,37 @@
+.filter {
+  font-weight: 400;
+  padding: 20px 0 10px 0;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.10);
+
+  .header {
+    margin-bottom: 10px;
+    padding: 0 20px;
+  }
+
+  .label {
+    display: flex;
+    padding: 10px 20px;
+    column-gap: 10px;
+    cursor: pointer;
+  }
+
+  .label:hover {
+    background-color: #F1FCFF;
+  }
+
+  .label:before {
+    display: block;
+    content: '';
+    width: 20px;
+    height: 20px;
+    border: 1px solid #9ABBCE;
+  }
+
+  .checkbox {
+    display: none;
+  }
+}
