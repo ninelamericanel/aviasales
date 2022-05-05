@@ -1,14 +1,15 @@
-import React from 'react';
+import React, { FC } from 'react';
 
 import { TicketList } from '../TicketList';
-import './App.scss';
 
-function App() {
+import classes from './App.module.scss';
+
+const App: FC = () => {
   return (
-    <div className="app">
+    <div className={classes.app}>
       <TicketList />
     </div>
   );
-}
+};
 
 export default App;
