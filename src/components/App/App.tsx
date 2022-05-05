@@ -4,7 +4,7 @@ import { TicketList } from '../TicketList';
 
 function App() {
   return (
-    <div className='App'>
+    <div className="App">
       <TicketList />
     </div>
   );

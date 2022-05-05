@@ -1,7 +1,5 @@
 import React, { FC } from 'react';
-
 // import classes from './Ticket.module.scss';
-
 const Ticket: FC = () => {
   return (
     <div>
