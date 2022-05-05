@@ -9,10 +9,15 @@
 
   .header {
     margin-bottom: 10px;
+    line-height: 12px;
+    letter-spacing: 0.5px;
     padding: 0 20px;
   }
 
   .label {
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 20px;
     display: flex;
     padding: 10px 20px;
     column-gap: 10px;
@@ -31,6 +36,7 @@
     width: 20px;
     height: 20px;
     border: 1px solid #9ABBCE;
+    border-radius: 2px;
   }
 
   .label:active.label:after {
