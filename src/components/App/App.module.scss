@@ -19,13 +19,22 @@ body {
   }
 
   .main {
-    display: flex;
-    column-gap: 20px;
-    align-items: flex-start;
+    display: grid;
+    grid-template-columns: 232px 1fr;
+    grid-template-areas:
+            'f t'
+            'f l'
+            '. l'
+            '. b';
+    gap: 20px;
     
     @media screen and (max-width: 960px) {
-      width: 100%;
-      flex-direction: column;
+      grid-template-columns: 1fr;
+      grid-template-areas:
+              't'
+              'f'
+              'l'
+              'b';
     }
   }
 
