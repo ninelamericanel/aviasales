@@ -121,6 +121,11 @@ const TicketList: FC = () => {
 
   return (
     <>
+      <div className={classes.tabs}>
+        <button className={classes.btn}>САМЫЙ ДЕШЕВЫЙ</button>
+        <button className={classes.btn}>САМЫЙ БЫСТРЫЙ</button>
+        <button className={classes.btn}>ОПТИМАЛЬНЫЙ</button>
+      </div>
       <div className={classes.filter}>
         {/*<form>*/}
         <div className={classes.header}>
@@ -146,15 +151,8 @@ const TicketList: FC = () => {
         </label>
         {/*</form>*/}
       </div>
-      <div className={classes.main}>
-        <div className={classes.tabs}>
-          <button className={classes.btn}>САМЫЙ ДЕШЕВЫЙ</button>
-          <button className={classes.btn}>САМЫЙ БЫСТРЫЙ</button>
-          <button className={classes.btn}>ОПТИМАЛЬНЫЙ</button>
-        </div>
-        <ul className={classes.list}>{elements}</ul>
-        <button className={classes.btn && classes.btnLong}>Показать еще 5 билетов</button>
-      </div>
+      <ul className={classes.list}>{elements}</ul>
+      <button className={classes.btn && classes.btnLong}>Показать еще 5 билетов</button>
     </>
   );
 };
