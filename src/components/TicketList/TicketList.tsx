@@ -145,13 +145,13 @@ const TicketList: FC = () => {
         {/*</form>*/}
       </div>
       <div className="main">
-        <div className="tabs">
-          <button className="btn">Самый дешевый</button>
-          <button className="btn">Самый быстрый</button>
-          <button className="btn">Оптимальный</button>
+        <div className={classes.tabs}>
+          <button className={classes.btn}>САМЫЙ ДЕШЕВЫЙ</button>
+          <button className={classes.btn}>САМЫЙ БЫСТРЫЙ</button>
+          <button className={classes.btn}>ОПТИМАЛЬНЫЙ</button>
         </div>
         <ul className="list">{elements}</ul>
-        <button className="btn">Показать еще 5 билетов</button>
+        <button className={classes.btn}>Показать еще 5 билетов</button>
       </div>
     </>
   );

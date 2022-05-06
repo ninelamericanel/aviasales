@@ -1,3 +1,5 @@
+@import "./src/variable";
+
 .filter {
   width: 232px;
   padding: 20px 0 10px 0;
@@ -28,7 +30,7 @@
   }
 
   .label:hover {
-    background-color: #F1FCFF;
+    background-color: $focusColor;
   }
 
   .label:before {
@@ -53,10 +55,33 @@
   }
 
   .label:active.label:before {
-    border: 1px solid #2196F3;
+    border: 1px solid $activeColor;
   }
 
   .checkbox {
     display: none;
   }
+}
+
+.tabs {
+  border-radius: 5px;
+  border: 1px solid #DFE5EC;
+  overflow: hidden;
+
+  .btn {
+    padding: 15px;
+    font-size: 12px;
+    line-height: 20px;
+    letter-spacing: 0.5px;
+    background-color: white;
+  }
+  .btn:not(:first-child,:last-child) {
+    border-right: 1px solid #DFE5EC;
+    border-left: 1px solid #DFE5EC;
+  }
+}
+
+.btn {
+  border-radius: 5px;
+  background-color: $activeColor;
 }
