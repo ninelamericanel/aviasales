@@ -112,7 +112,7 @@ const TicketList: FC = () => {
 
   const elements = arr.map((item, id) => {
     return (
-      <li key={id} className="ticket">
+      <li key={id} className={classes.ticket}>
         <Ticket />
       </li>
     );
@@ -144,13 +144,13 @@ const TicketList: FC = () => {
         </label>
         {/*</form>*/}
       </div>
-      <div className="main">
+      <div className={classes.main}>
         <div className={classes.tabs}>
           <button className={classes.btn}>САМЫЙ ДЕШЕВЫЙ</button>
           <button className={classes.btn}>САМЫЙ БЫСТРЫЙ</button>
           <button className={classes.btn}>ОПТИМАЛЬНЫЙ</button>
         </div>
-        <ul className="list">{elements}</ul>
+        <ul className={classes.list}>{elements}</ul>
         <button className={classes.btn}>Показать еще 5 билетов</button>
       </div>
     </>
