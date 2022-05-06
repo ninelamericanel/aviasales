@@ -10,7 +10,7 @@ const Ticket: FC = () => {
         <div className={classes.price}>
           <p>13 400 P</p>
         </div>
-        <div className="logo">
+        <div className={classes.logo}>
           <img src={logo}></img>
         </div>
       </div>
