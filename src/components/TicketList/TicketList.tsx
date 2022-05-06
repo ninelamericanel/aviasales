@@ -151,7 +151,7 @@ const TicketList: FC = () => {
           <button className={classes.btn}>ОПТИМАЛЬНЫЙ</button>
         </div>
         <ul className={classes.list}>{elements}</ul>
-        <button className={classes.btn}>Показать еще 5 билетов</button>
+        <button className={classes.btn && classes.btnLong}>Показать еще 5 билетов</button>
       </div>
     </>
   );

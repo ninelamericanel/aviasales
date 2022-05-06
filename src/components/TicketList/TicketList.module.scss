@@ -103,7 +103,9 @@
   }
 }
 
-.btn {
-  border-radius: 5px;
+.btnLong {
+  height: 50px;
   background-color: $activeColor;
+  color: $activeColorFont;
+  border-radius: $borderRadius;
 }
