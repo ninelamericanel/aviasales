@@ -9,7 +9,7 @@ body {
 }
 
 .app {
-  width: 960px;
+  max-width: 960px;
   padding: 50px 103px;
   margin: 0 auto;
 
@@ -22,6 +22,11 @@ body {
     display: flex;
     column-gap: 20px;
     align-items: flex-start;
+    
+    @media screen and (max-width: 960px) {
+      width: 100%;
+      flex-direction: column;
+    }
   }
 
 }

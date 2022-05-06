@@ -4,6 +4,10 @@
   display: flex;
   flex-direction: column;
   row-gap: 20px;
+
+  @media screen and (max-width: 960px) {
+    width: 100%;
+  }
 }
 
 .list {
@@ -31,11 +35,36 @@
   border-radius: $borderRadius;
   box-shadow: $boxShadow;
 
+  @media screen and (max-width: 960px) {
+    width: 100%;
+    //margin-bottom: 20px;
+    height: 52px;
+    overflow: hidden;
+  }
+
   .header {
+    display: flex;
+    column-gap: 10px;
+    align-items: center;
     margin-bottom: 10px;
     line-height: 12px;
     letter-spacing: 0.5px;
     padding: 0 20px;
+
+    @media screen and (max-width: 960px) {
+      margin-bottom: 20px;
+      cursor: pointer;
+    }
+
+    .burger {
+      display: none;
+      height: 10px;
+      width: 12px;
+      
+      @media screen and (max-width: 960px) {
+        display: block;
+      }
+    }
   }
 
   .label {
@@ -86,9 +115,14 @@
 }
 
 .tabs {
+  display: flex;
   border-radius: 5px;
   border: 1px solid #DFE5EC;
   overflow: hidden;
+
+  @media screen and (max-width: 960px) {
+    width: 100%;
+  }
 
   .btn {
     padding: 15px;
@@ -96,6 +130,8 @@
     line-height: 20px;
     letter-spacing: 0.5px;
     background-color: white;
+
+    flex-grow: 1;
   }
   .btn:not(:first-child,:last-child) {
     border-right: 1px solid #DFE5EC;

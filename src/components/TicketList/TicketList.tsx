@@ -3,6 +3,7 @@ import React, { FC } from 'react';
 import { Ticket } from '../Ticket';
 
 import classes from './TicketList.module.scss';
+import burger from './burger.svg';
 
 const TicketList: FC = () => {
   const arr = [
@@ -123,6 +124,7 @@ const TicketList: FC = () => {
       <div className={classes.filter}>
         {/*<form>*/}
         <div className={classes.header}>
+          <img className={classes.burger} src={burger} alt="Раскрыть фильтер"></img>
           <p>КОЛИЧЕСТВО ПЕРЕСАДОК</p>
         </div>
         <label className={classes.label}>
