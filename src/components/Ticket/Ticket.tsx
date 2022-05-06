@@ -1,5 +1,7 @@
 import React, { FC } from 'react';
+
 // import classes from './Ticket.module.scss';
+import logo from './S7Logo.png';
 const Ticket: FC = () => {
   return (
     <div>
@@ -7,7 +9,7 @@ const Ticket: FC = () => {
         <p>13 400 P</p>
       </div>
       <div className="logo">
-        <img></img>
+        <img src={logo}></img>
       </div>
     </div>
   );

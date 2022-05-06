@@ -3,13 +3,14 @@ import React, { FC } from 'react';
 import { TicketList } from '../TicketList';
 
 import classes from './App.module.scss';
+import logo from './Logo.png';
 
 const App: FC = () => {
   return (
     <div className={classes.app}>
       <header className={classes.header}>
         <a href="https://www.aviasales.ru/">
-          <img src="./Logo.svg" alt="Aviasales logo"></img>
+          <img src={logo} alt="Aviasales logo"></img>
         </a>
       </header>
       <main className={classes.main}>
