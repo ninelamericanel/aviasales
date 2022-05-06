@@ -1,4 +1,26 @@
+@import "src/variable";
+
 .header {
   display: flex;
   justify-content: space-between;
+
+  .price {
+    color: $activeColor;
+    font-size: 24px;
+    line-height: 24px;
+  }
+}
+
+.table {
+  width: 100%;
+
+  thead {
+    color: #A0B0B9;
+    line-height: 18px;
+  }
+
+  tbody {
+    font-size: 14px;
+    line-height: 21px;
+  }
 }
