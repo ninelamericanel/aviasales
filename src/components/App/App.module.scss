@@ -13,6 +13,10 @@ body {
   padding: 50px 103px;
   margin: 0 auto;
 
+  @media screen and (max-width: 639px) {
+    padding: 20px;
+  }
+
   .header {
     display: flex;
     justify-content: center;
