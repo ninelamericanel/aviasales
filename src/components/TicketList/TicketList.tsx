@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 
-import { Ticket } from '../Ticket';
-import classesTabs from '../Tabs/Tabs.module.scss';
+import { Ticket } from 'components/Ticket';
+import classesTabs from 'components/Tabs/Tabs.module.scss';
 
 import classes from './TicketList.module.scss';
 

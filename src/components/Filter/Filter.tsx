@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
 
-import classes from '../FIlter/Filter.module.scss';
-
+import classes from './Filter.module.scss';
 import burger from './burger.svg';
 
 const Filter: FC = () => {

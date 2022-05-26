@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-import classes from '../Tabs/Tabs.module.scss';
+import classes from './Tabs.module.scss';
 
 const Tabs: FC = () => {
   return (
