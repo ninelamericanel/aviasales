@@ -107,42 +107,6 @@
   }
 }
 
-.tabs {
-  grid-area: t;
-
-  display: flex;
-  border-radius: 5px;
-  border: 1px solid #DFE5EC;
-  overflow: hidden;
-
-  @media screen and (max-width: 960px) {
-    width: 100%;
-  }
-  @media screen and (max-width: 475px) {
-    flex-direction: column;
-  }
-
-  .btn {
-    padding: 15px;
-    font-size: 12px;
-    line-height: 20px;
-    letter-spacing: 0.5px;
-    background-color: white;
-
-    flex-grow: 1;
-  }
-  .btn:not(:first-child,:last-child) {
-    border-right: 1px solid #DFE5EC;
-    border-left: 1px solid #DFE5EC;
-
-    @media screen and (max-width: 475px) {
-      border: 0;
-      border-top: 1px solid #DFE5EC;
-      border-bottom: 1px solid #DFE5EC;
-    }
-  }
-}
-
 .btnLong {
   grid-area: b;
 

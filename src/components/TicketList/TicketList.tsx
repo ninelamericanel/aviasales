@@ -121,11 +121,6 @@ const TicketList: FC = () => {
 
   return (
     <>
-      <div className={classes.tabs}>
-        <button className={classes.btn}>САМЫЙ ДЕШЕВЫЙ</button>
-        <button className={classes.btn}>САМЫЙ БЫСТРЫЙ</button>
-        <button className={classes.btn}>ОПТИМАЛЬНЫЙ</button>
-      </div>
       <div className={classes.filter}>
         {/*<form>*/}
         <div className={classes.header}>
