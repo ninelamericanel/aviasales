@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 
 import { TicketList } from '../TicketList';
+import { Tabs } from '../Tabs';
 
 import classes from './App.module.scss';
 import logo from './Logo.png';
@@ -14,6 +15,7 @@ const App: FC = () => {
         </a>
       </header>
       <main className={classes.main}>
+        <Tabs />
         <TicketList />
       </main>
     </div>
