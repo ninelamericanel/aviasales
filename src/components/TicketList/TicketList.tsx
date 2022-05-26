@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
 
 import { Ticket } from '../Ticket';
+import classesTabs from '../Tabs/Tabs.module.scss';
 
 import classes from './TicketList.module.scss';
-import burger from './burger.svg';
 
 const TicketList: FC = () => {
   const arr = [
@@ -121,33 +121,8 @@ const TicketList: FC = () => {
 
   return (
     <>
-      <div className={classes.filter}>
-        {/*<form>*/}
-        <div className={classes.header}>
-          <img className={classes.burger} src={burger} alt="Раскрыть фильтер"></img>
-          <p>КОЛИЧЕСТВО ПЕРЕСАДОК</p>
-        </div>
-        <label className={classes.label}>
-          <input className={classes.checkbox} type="checkbox"></input>
-          Все
-        </label>
-        <label className={classes.label}>
-          <input className={classes.checkbox} type="checkbox"></input>
-          Без пересадок
-        </label>
-        <label className={classes.label}>
-          <input className={classes.checkbox} type="checkbox"></input>1 пересадка
-        </label>
-        <label className={classes.label}>
-          <input className={classes.checkbox} type="checkbox"></input>2 пересадки
-        </label>
-        <label className={classes.label}>
-          <input className={classes.checkbox} type="checkbox"></input>3 пересадки
-        </label>
-        {/*</form>*/}
-      </div>
       <ul className={classes.list}>{elements}</ul>
-      <button className={classes.btn && classes.btnLong}>Показать еще 5 билетов</button>
+      <button className={classesTabs.btn && classes.btnLong}>Показать еще 5 билетов</button>
     </>
   );
 };
