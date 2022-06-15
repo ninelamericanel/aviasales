@@ -27,6 +27,7 @@
   "plugins": ["react", "prettier", "import", "@typescript-eslint"],
   "rules": {
     "@typescript-eslint/comma-dangle": "off",
+    "@typescript-eslint/default-param-last": "off",
     "indent": ["error", 2],
     "prettier/prettier": "error",
     "linebreak-style": [0, "unix"],
