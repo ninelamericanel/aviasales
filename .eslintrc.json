@@ -26,6 +26,7 @@
   "parser": "@typescript-eslint/parser",
   "plugins": ["react", "prettier", "import", "@typescript-eslint"],
   "rules": {
+    "@typescript-eslint/comma-dangle": "off",
     "indent": ["error", 2],
     "prettier/prettier": "error",
     "linebreak-style": [0, "unix"],
