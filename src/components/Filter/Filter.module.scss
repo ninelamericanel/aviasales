@@ -42,7 +42,11 @@
     }
   }
 
-  .label {
+  .checkbox {
+    display: none;
+  }
+
+  .label, .labelActive {
     font-weight: 400;
     font-size: 13px;
     line-height: 20px;
@@ -55,11 +59,7 @@
     position: relative;
   }
 
-  .label:hover {
-    background-color: $focusColor;
-  }
-
-  .label:before {
+  .label:before, .labelActive:before {
     display: block;
     content: '';
     width: 20px;
@@ -68,7 +68,16 @@
     border-radius: 2px;
   }
 
-  .label:active.label:after {
+  .label:hover, .labelActive:hover {
+    background-color: $focusColor;
+  }
+
+  .labelActive:before {
+    border: 1px solid $activeColor;
+  }
+
+
+  .labelActive:after  {
     display: block;
     content: '';
     width: 12px;
@@ -78,13 +87,5 @@
     position: absolute;
     top: 16px;
     left: 24px;
-  }
-
-  .label:active.label:before {
-    border: 1px solid $activeColor;
-  }
-
-  .checkbox {
-    display: none;
   }
 }
