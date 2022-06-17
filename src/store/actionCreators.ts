@@ -1,4 +1,6 @@
-export const click = (id: number) => ({ type: 'CLICK', id });
-export const checkActionCreator = (id: number) => ({ type: 'CHECK', id });
-export const checkAllActionCreator = () => ({ type: 'CHECK_ALL' });
-export const checkAutomaticActionCreator = () => ({ type: 'CHECK_AUTOMATIC' });
+import { ActionType } from '../actionTypes';
+
+export const clickActionCreator = (id: number) => ({ type: ActionType.CLICK, id });
+export const checkActionCreator = (id: number) => ({ type: ActionType.CHECK, id });
+export const checkAllActionCreator = () => ({ type: ActionType.CHECK_ALL });
+export const checkAutomaticActionCreator = () => ({ type: ActionType.CHECK_AUTOMATIC });
