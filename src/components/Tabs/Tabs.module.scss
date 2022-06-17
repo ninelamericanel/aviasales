@@ -1,3 +1,5 @@
+@import "./src/variable";
+
 .tabs {
   grid-area: t;
 
@@ -13,7 +15,7 @@
     flex-direction: column;
   }
 
-  .btn {
+  .btn, .btnActive {
     padding: 15px;
     font-size: 12px;
     line-height: 20px;
@@ -22,6 +24,7 @@
 
     flex-grow: 1;
   }
+
   .btn:not(:first-child,:last-child) {
     border-right: 1px solid #DFE5EC;
     border-left: 1px solid #DFE5EC;
@@ -32,4 +35,9 @@
       border-bottom: 1px solid #DFE5EC;
     }
   }
+  .btnActive {
+    background-color: $activeColor;
+    color: $activeColorFont;
+  }
+
 }
