@@ -2,9 +2,8 @@ import React, { FC, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
 
-import { CheckboxType } from 'types';
+import { CheckboxType, StateType } from 'types';
 import * as actions from 'store/actionCreators';
-import { InitialStateType } from 'store/initialState';
 
 import classes from './Filter.module.scss';
 import burger from './burger.svg';
@@ -44,10 +43,10 @@ const Filter: FC<Props> = ({ checkboxes, checkAutomatic, checkboxAll, check, che
   );
 };
 
-const mapStateToProps = (state: InitialStateType) => {
+const mapStateToProps = (state: StateType) => {
   return {
-    checkboxes: state.checkboxes,
-    checkboxAll: state.checkboxAll,
+    checkboxes: state.FilterReducer.checkboxes,
+    checkboxAll: state.FilterReducer.checkboxAll,
   };
 };
 
