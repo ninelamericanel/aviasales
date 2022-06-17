@@ -11,7 +11,7 @@ const App: FC = () => {
   return (
     <div className={classes.app}>
       <header className={classes.header}>
-        <a href="https://www.aviasales.ru/">
+        <a href="#">
           <img src={logo} alt="Aviasales logo"></img>
         </a>
       </header>
