@@ -1,10 +1,10 @@
 import React, { FC, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
+import { Dispatch, bindActionCreators } from 'redux';
 
 import { CheckboxType } from 'types';
-
-import { InitialStateType } from '../../store/initialState';
+import * as actions from 'store/actionCreators';
+import { InitialStateType } from 'store/initialState';
 
 import classes from './Filter.module.scss';
 import burger from './burger.svg';
@@ -52,10 +52,14 @@ const mapStateToProps = (state: InitialStateType) => {
 };
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
+  const { checkActionCreator, checkAllActionCreator, checkAutomaticActionCreator } = bindActionCreators(
+    actions,
+    dispatch
+  );
   return {
-    check: (id: number) => dispatch({ type: 'CHECK', id }),
-    checkAll: () => dispatch({ type: 'CHECK_ALL' }),
-    checkAutomatic: () => dispatch({ type: 'CHECK_AUTOMATIC' }),
+    check: (id: number) => checkActionCreator(id),
+    checkAll: checkAllActionCreator,
+    checkAutomatic: checkAutomaticActionCreator,
   };
 };
 
