@@ -11,12 +11,18 @@ export interface TabsType {
 }
 
 export interface StateType {
+  SearchIdReducer: {
+    searchId: string;
+  };
   FilterReducer: {
     checkboxes: CheckboxType[];
     checkboxAll: boolean;
   };
   TabsReducer: {
     tabs: TabsType[];
+  };
+  TicketsReducer: {
+    tickets: TicketType[];
   };
 }
 
