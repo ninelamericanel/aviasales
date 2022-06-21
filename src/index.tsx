@@ -1,13 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { createStore } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
 import { Provider } from 'react-redux';
+import { composeWithDevTools } from '@redux-devtools/extension';
+import thunk from 'redux-thunk';
 
 import './reset.scss';
 import { App } from './components/App';
-import FilterReducer from './store/reducers/FilterReducer';
+import reducer from './store/reducers/reducer';
 
-const store = createStore(FilterReducer);
+const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
