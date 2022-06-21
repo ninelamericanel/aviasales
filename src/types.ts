@@ -23,6 +23,8 @@ export interface StateType {
   };
   TicketsReducer: {
     tickets: TicketType[];
+    load: boolean;
+    error: boolean;
   };
 }
 

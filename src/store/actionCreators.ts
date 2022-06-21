@@ -6,4 +6,10 @@ export const checkActionCreator = (id: number) => ({ type: ActionType.CHECK, id 
 export const checkAllActionCreator = () => ({ type: ActionType.CHECK_ALL });
 export const checkAutomaticActionCreator = () => ({ type: ActionType.CHECK_AUTOMATIC });
 
-export const setTicketsActionCreator = (tickets: TicketType[]) => ({ type: ActionType.SET_TICKETS, tickets });
+export const setTicketsActionCreator = (tickets: TicketType[], load: boolean) => ({
+  type: ActionType.SET_TICKETS,
+  tickets,
+  load,
+});
+export const setErrorActionCreator = () => ({ type: ActionType.SET_ERROR });
+// export const setLoaderActionCreator = (load: boolean) => ({ type: ActionType.SET_LOADER, load });
