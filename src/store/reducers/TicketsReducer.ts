@@ -3,10 +3,14 @@ import { TicketType } from 'types';
 
 export interface InitialStateType {
   tickets: TicketType[];
+  load: boolean;
+  error: boolean;
 }
 
 const initialState: InitialStateType = {
   tickets: [],
+  load: true,
+  error: false,
 };
 
 const TicketsReducer = (state = initialState, action: Action) => {
@@ -15,6 +19,12 @@ const TicketsReducer = (state = initialState, action: Action) => {
       return {
         ...state,
         tickets: action.tickets,
+        load: action.load,
+      };
+    case ActionType.SET_ERROR:
+      return {
+        ...state,
+        error: !state.error,
       };
     default:
       return state;
