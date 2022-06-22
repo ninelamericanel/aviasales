@@ -1,130 +1,75 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators, Dispatch } from 'redux';
+import { Alert, Spin } from 'antd';
 
 import { Ticket } from 'components/Ticket';
 import classesTabs from 'components/Tabs/Tabs.module.scss';
+import { CheckboxType, StateType, TicketType } from 'types';
+
+import { getSearchId } from '../../services/ticketServices';
+import * as thunks from '../../store/thunks';
 
 import classes from './TicketList.module.scss';
 
-const TicketList: FC = () => {
-  const arr = [
-    {
-      // Цена в рублях
-      price: 13400,
-      // Код авиакомпании (iata)
-      carrier: 'string',
-      // Массив перелётов.
-      // В тестовом задании это всегда поиск "туда-обратно" значит состоит из двух элементов
-      segments: [
-        {
-          // Код города (iata)
-          origin: 'Minsk',
-          // Код города (iata)
-          destination: 'Moscow',
-          // Дата и время вылета туда
-          date: '10:45',
-          // Массив кодов (iata) городов с пересадками
-          stops: ['HKG', 'JNB'],
-          // Общее время перелёта в минутах
-          duration: 1275,
-        },
-        {
-          // Код города (iata)
-          origin: 'Minsk',
-          // Код города (iata)
-          destination: 'Moscow',
-          // Дата и время вылета туда
-          date: '10:45',
-          // Массив кодов (iata) городов с пересадками
-          stops: ['HKG', 'JNB'],
-          // Общее время перелёта в минутах
-          duration: 1275,
-        },
-      ],
-    },
-    {
-      // Цена в рублях
-      price: 13400,
-      // Код авиакомпании (iata)
-      carrier: 'string',
-      // Массив перелётов.
-      // В тестовом задании это всегда поиск "туда-обратно" значит состоит из двух элементов
-      segments: [
-        {
-          // Код города (iata)
-          origin: 'Minsk',
-          // Код города (iata)
-          destination: 'Moscow',
-          // Дата и время вылета туда
-          date: '10:45',
-          // Массив кодов (iata) городов с пересадками
-          stops: ['HKG', 'JNB'],
-          // Общее время перелёта в минутах
-          duration: 1275,
-        },
-        {
-          // Код города (iata)
-          origin: 'Minsk',
-          // Код города (iata)
-          destination: 'Moscow',
-          // Дата и время вылета туда
-          date: '10:45',
-          // Массив кодов (iata) городов с пересадками
-          stops: ['HKG', 'JNB'],
-          // Общее время перелёта в минутах
-          duration: 1275,
-        },
-      ],
-    },
-    {
-      // Цена в рублях
-      price: 13400,
-      // Код авиакомпании (iata)
-      carrier: 'string',
-      // Массив перелётов.
-      // В тестовом задании это всегда поиск "туда-обратно" значит состоит из двух элементов
-      segments: [
-        {
-          // Код города (iata)
-          origin: 'Minsk',
-          // Код города (iata)
-          destination: 'Moscow',
-          // Дата и время вылета туда
-          date: '10:45',
-          // Массив кодов (iata) городов с пересадками
-          stops: ['HKG', 'JNB'],
-          // Общее время перелёта в минутах
-          duration: 1275,
-        },
-        {
-          // Код города (iata)
-          origin: 'Minsk',
-          // Код города (iata)
-          destination: 'Moscow',
-          // Дата и время вылета туда
-          date: '10:45',
-          // Массив кодов (iata) городов с пересадками
-          stops: ['HKG', 'JNB'],
-          // Общее время перелёта в минутах
-          duration: 1275,
-        },
-      ],
-    },
-  ];
+interface Props {
+  tickets: TicketType[];
+  filter: CheckboxType[];
+  filterAll: boolean;
+  getTickets: (searchId: string) => void;
+  load: boolean;
+  error: boolean;
+}
 
-  const elements = arr.map((item, id) => {
+const TicketList: FC<Props> = ({ tickets, getTickets, error, load, filterAll }) => {
+  useEffect(() => {
+    if (filterAll) {
+      getSearchId().then((result) => {
+        getTickets(result.searchId);
+      });
+    }
+  }, [filterAll]);
+
+  const withoutFilter = !filterAll ? (
+    <Alert message="Informational Notes" description="Билеты по заданным фильтрам не найдены" type="info" showIcon />
+  ) : null;
+  const loader = load ? <Spin className={classes.spinner} size="large" /> : null;
+  const errorView = error ? (
+    <Alert message="Error" description="Ошибка! попробуйте позже" type="error" showIcon />
+  ) : null;
+
+  const elements = tickets.map((item, id) => {
     return (
       <li key={id} className={classes.ticket}>
-        <Ticket />
+        <Ticket ticket={item} />
       </li>
     );
   });
+  const view = !load && !error && tickets.length > 0 ? elements : null;
 
   return (
     <>
-      <ul className={classes.list}>{elements}</ul>
+      <ul className={classes.list}>{withoutFilter || loader || errorView || view}</ul>
       <button className={classesTabs.btn && classes.btnLong}>Показать еще 5 билетов</button>
     </>
   );
 };
 
-export default TicketList;
+const mapStateToProps = (state: StateType) => {
+  return {
+    tickets: state.TicketsReducer.tickets,
+    filter: state.FilterReducer.checkboxes,
+    filterAll: state.FilterReducer.checkboxAll,
+    load: state.TicketsReducer.load,
+    error: state.TicketsReducer.error,
+  };
+};
+
+const mapDispatchToProps = (dispatch: Dispatch) => {
+  const { getTicketsThunk } = bindActionCreators(thunks, dispatch);
+  return {
+    getTickets: getTicketsThunk,
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TicketList);

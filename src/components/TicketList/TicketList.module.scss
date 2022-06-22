@@ -6,6 +6,11 @@
   display: flex;
   flex-direction: column;
   row-gap: 20px;
+
+  .spinner {
+    //grid-area: l;
+    margin: auto auto;
+  }
 }
 
 .ticket {
