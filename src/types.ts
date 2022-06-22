@@ -1,7 +1,7 @@
 export interface CheckboxType {
   id: number;
   name: string;
-  isChecked: boolean;
+  // isChecked: boolean;
 }
 
 export interface TabsType {
@@ -15,6 +15,7 @@ export interface StateType {
     searchId: string;
   };
   FilterReducer: {
+    isChecked: number[];
     checkboxes: CheckboxType[];
     checkboxAll: boolean;
   };

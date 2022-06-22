@@ -8,10 +8,17 @@ export enum ActionType {
   SET_TICKETS = 'SET_TICKETS',
   SET_LOADER = 'SET_LOADER',
   SET_ERROR = 'SET_ERROR',
+  UNCHECK = 'UNCHECK',
+  UNCHECK_AUTOMATIC = 'UNCHECK_AUTOMATIC',
 }
 
 interface ActionCheck {
   type: ActionType.CHECK;
+  id: number;
+}
+
+interface ActionUnCheck {
+  type: ActionType.UNCHECK;
   id: number;
 }
 
@@ -43,7 +50,13 @@ interface ActionSetError {
   type: ActionType.SET_ERROR;
 }
 
+interface ActionUnCkeckAutomatic {
+  type: ActionType.UNCHECK_AUTOMATIC;
+}
+
 export type Action =
+  | ActionUnCkeckAutomatic
+  | ActionUnCheck
   | ActionSetLoader
   | ActionSetTickets
   | ActionCheck
