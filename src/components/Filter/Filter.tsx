@@ -2,8 +2,10 @@ import React, { FC, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
 
-import { CheckboxType, StateType } from 'types';
+import { CheckboxType, ObjectTickets, StateType } from 'types';
 import * as actions from 'store/actionCreators';
+import * as thunks from 'store/thunks';
+import { getSearchId } from 'services/ticketServices';
 
 import classes from './Filter.module.scss';
 import burger from './burger.svg';
@@ -17,6 +19,8 @@ interface Props {
   checkboxAll: boolean;
   unCheck: (id: number) => void;
   unCheckAutomatic: () => void;
+  getTickets: (searchId: string) => void;
+  tickets: ObjectTickets;
 }
 
 const Filter: FC<Props> = ({
@@ -28,6 +32,7 @@ const Filter: FC<Props> = ({
   checkboxAll,
   check,
   checkAll,
+  getTickets,
 }) => {
   useEffect(() => {
     if (isChecked.length === checkboxes.length) checkAutomatic();
@@ -36,6 +41,12 @@ const Filter: FC<Props> = ({
   useEffect(() => {
     if (checkboxAll && isChecked.length < checkboxes.length) unCheckAutomatic();
   }, [checkboxAll, isChecked]);
+
+  const sendRequest = () => {
+    getSearchId().then((result) => {
+      getTickets(result.searchId);
+    });
+  };
 
   return (
     <div className={classes.filter}>
@@ -55,7 +66,10 @@ const Filter: FC<Props> = ({
               type="checkbox"
               onChange={() => {
                 if (isChecked.includes(checkbox.id)) unCheck(checkbox.id);
-                if (!isChecked.includes(checkbox.id)) check(checkbox.id);
+                if (!isChecked.includes(checkbox.id)) {
+                  check(checkbox.id);
+                  sendRequest();
+                }
               }}
             />
             {checkbox.name}
@@ -71,6 +85,7 @@ const mapStateToProps = (state: StateType) => {
     isChecked: state.FilterReducer.isChecked,
     checkboxes: state.FilterReducer.checkboxes,
     checkboxAll: state.FilterReducer.checkboxAll,
+    tickets: state.TicketsReducer.tickets,
   };
 };
 
@@ -82,8 +97,10 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
     unCheckActionCreator,
     unCheckAutomatic,
   } = bindActionCreators(actions, dispatch);
+  const { getTicketsThunk } = bindActionCreators(thunks, dispatch);
   return {
     check: (id: number) => checkActionCreator(id),
+    getTickets: getTicketsThunk,
     unCheck: (id: number) => unCheckActionCreator(id),
     checkAll: checkAllActionCreator,
     checkAutomatic: checkAutomaticActionCreator,
