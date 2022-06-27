@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 import LinearProgress from '@mui/material/LinearProgress';
 
 import classesTabs from 'components/Tabs/Tabs.module.scss';
-import { CheckboxType, StateType, TicketType } from 'types';
+import { CheckboxType, StateType, TabsType, TicketType } from 'types';
 
 import { Ticket } from '../Ticket';
 
@@ -17,10 +17,27 @@ interface Props {
   loading: boolean;
   errorStatus: boolean;
   checkedCheckboxes: number[];
+  tabs: TabsType[];
 }
 
-const TicketsList: FC<Props> = ({ tickets, loading, errorStatus }) => {
-  console.log(tickets.length);
+const sortByPrice = (a: TicketType, b: TicketType) => {
+  if (a.price > b.price) return 1;
+  return -1;
+};
+const sortByDuration = (a: TicketType, b: TicketType) => {
+  const durationA = a.segments[0].duration;
+  const durationB = b.segments[0].duration;
+  if (durationA > durationB) return 1;
+  return -1;
+};
+
+const TicketsList: FC<Props> = ({ tabs, tickets, loading, errorStatus }) => {
+  const activeTab = tabs.reduce((id: number, tab) => {
+    if (tab.isActive) id += tab.id;
+    return id;
+  }, 0);
+  if (activeTab === 1) tickets.sort(sortByPrice);
+  if (activeTab === 2) tickets.sort(sortByDuration);
   const spinner =
     loading && !errorStatus ? (
       <Box sx={{ width: '100%' }}>
@@ -59,7 +76,8 @@ const mapStateToProps = (state: StateType) => {
     checkedCheckboxes: state.FilterReducer.isChecked,
     loading: state.TicketsReducer.load,
     errorStatus: state.TicketsReducer.error,
+    tabs: state.TabsReducer.tabs,
   };
 };
-//
+
 export default connect(mapStateToProps)(TicketsList);

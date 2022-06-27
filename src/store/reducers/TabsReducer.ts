@@ -16,7 +16,7 @@ const initialState: InitialState = {
 const TabsReducer = (state = initialState, action: Action) => {
   const { tabs } = state;
   switch (action.type) {
-    case ActionType.CLICK:
+    case ActionType.SET_TAB:
       return {
         ...state,
         tabs: tabs.map((item) =>

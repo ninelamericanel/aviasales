@@ -4,7 +4,7 @@ export enum ActionType {
   CHECK = 'CHECK',
   CHECK_ALL = 'CHECK_ALL',
   CHECK_AUTOMATIC = 'CHECK_AUTOMATIC',
-  CLICK = 'CLICK',
+  SET_TAB = 'SET_TAB',
   SET_TICKETS = 'SET_TICKETS',
   SET_LOADER = 'SET_LOADER',
   SET_ERROR = 'SET_ERROR',
@@ -13,6 +13,7 @@ export enum ActionType {
   FILTER_TICKETS = 'FILTER_TICKETS',
   SET_IDS_TICKETS = 'SET_IDS_TICKETS',
   UNCHECK_ALL = 'UNCHECK_ALL',
+  SORT = 'SORT',
 }
 
 interface ActionCheck {
@@ -34,8 +35,8 @@ interface ActionCheckAutomatic {
   type: ActionType.CHECK_AUTOMATIC;
 }
 
-interface ActionClick {
-  type: ActionType.CLICK;
+interface ActionSetTab {
+  type: ActionType.SET_TAB;
   id: number;
 }
 
@@ -73,7 +74,13 @@ interface ActionUnCheckAll {
   type: ActionType.UNCHECK_ALL;
 }
 
+interface ActionSort {
+  type: ActionType.SORT;
+  callback: (id: number) => number;
+}
+
 export type Action =
+  | ActionSort
   | ActionUnCheckAll
   | ActionSetIdsTickets
   | ActionFilterTickets
@@ -84,5 +91,5 @@ export type Action =
   | ActionCheck
   | ActionCheckAll
   | ActionCheckAutomatic
-  | ActionClick
+  | ActionSetTab
   | ActionSetError;
