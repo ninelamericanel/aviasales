@@ -1,0 +1,28 @@
+@import "./src/variable";
+
+.list {
+  grid-area: l;
+
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+}
+
+.ticket {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  padding: 20px;
+  background-color: white;
+  border-radius: $borderRadius;
+  box-shadow: $boxShadow;
+}
+
+.btnLong {
+  grid-area: b;
+
+  height: 50px;
+  background-color: $activeColor;
+  color: $activeColorFont;
+  border-radius: $borderRadius;
+}

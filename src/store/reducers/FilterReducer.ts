@@ -10,17 +10,25 @@ export interface InitialStateType {
 const initialState: InitialStateType = {
   isChecked: [],
   checkboxes: [
-    { id: 1, name: 'Без пересадок' },
-    { id: 2, name: '1 пересадка' },
-    { id: 3, name: '2 пересадки' },
-    { id: 4, name: '3 пересадки' },
+    { id: 0, name: 'Без пересадок' },
+    { id: 1, name: '1 пересадка' },
+    { id: 2, name: '2 пересадки' },
+    { id: 3, name: '3 пересадки' },
   ],
   checkboxAll: false,
 };
 
 const FilterReducer = (state = initialState, action: Action) => {
-  const { checkboxes, checkboxAll } = state;
+  const { checkboxes } = state;
   switch (action.type) {
+    case ActionType.SET_IDS_TICKETS:
+      return {
+        ...state,
+        checkboxes: checkboxes.map((item) => {
+          if (item.id === action.idCheckbox) return { ...item, ticketsIds: action.ids };
+          return item;
+        }),
+      };
     case ActionType.CHECK:
       return {
         ...state,
@@ -35,8 +43,8 @@ const FilterReducer = (state = initialState, action: Action) => {
     case ActionType.CHECK_ALL:
       return {
         ...state,
-        checkboxAll: !checkboxAll,
-        isChecked: [...checkboxes.map((checkbox) => checkbox.id)],
+        checkboxAll: !state.checkboxAll,
+        isChecked: action.array,
       };
     case ActionType.CHECK_AUTOMATIC:
       return {

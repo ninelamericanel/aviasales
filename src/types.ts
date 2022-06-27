@@ -1,7 +1,6 @@
 export interface CheckboxType {
   id: number;
   name: string;
-  // isChecked: boolean;
 }
 
 export interface TabsType {
@@ -11,9 +10,6 @@ export interface TabsType {
 }
 
 export interface StateType {
-  SearchIdReducer: {
-    searchId: string;
-  };
   FilterReducer: {
     isChecked: number[];
     checkboxes: CheckboxType[];
@@ -27,6 +23,10 @@ export interface StateType {
     load: boolean;
     error: boolean;
   };
+}
+
+export interface ObjectTickets {
+  [key: number]: TicketType;
 }
 
 export interface TicketType {

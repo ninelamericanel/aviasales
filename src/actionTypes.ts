@@ -10,6 +10,9 @@ export enum ActionType {
   SET_ERROR = 'SET_ERROR',
   UNCHECK = 'UNCHECK',
   UNCHECK_AUTOMATIC = 'UNCHECK_AUTOMATIC',
+  FILTER_TICKETS = 'FILTER_TICKETS',
+  SET_IDS_TICKETS = 'SET_IDS_TICKETS',
+  UNCHECK_ALL = 'UNCHECK_ALL',
 }
 
 interface ActionCheck {
@@ -24,6 +27,7 @@ interface ActionUnCheck {
 
 interface ActionCheckAll {
   type: ActionType.CHECK_ALL;
+  array: [] | number[];
 }
 
 interface ActionCheckAutomatic {
@@ -38,12 +42,11 @@ interface ActionClick {
 interface ActionSetTickets {
   type: ActionType.SET_TICKETS;
   tickets: TicketType[];
-  load: boolean;
 }
 
 interface ActionSetLoader {
   type: ActionType.SET_LOADER;
-  load: boolean;
+  active: boolean;
 }
 
 interface ActionSetError {
@@ -54,7 +57,26 @@ interface ActionUnCkeckAutomatic {
   type: ActionType.UNCHECK_AUTOMATIC;
 }
 
+interface ActionFilterTickets {
+  type: ActionType.FILTER_TICKETS;
+  filter: number;
+  ids: string[];
+}
+
+interface ActionSetIdsTickets {
+  type: ActionType.SET_IDS_TICKETS;
+  ids: string[];
+  idCheckbox: number;
+}
+
+interface ActionUnCheckAll {
+  type: ActionType.UNCHECK_ALL;
+}
+
 export type Action =
+  | ActionUnCheckAll
+  | ActionSetIdsTickets
+  | ActionFilterTickets
   | ActionUnCkeckAutomatic
   | ActionUnCheck
   | ActionSetLoader

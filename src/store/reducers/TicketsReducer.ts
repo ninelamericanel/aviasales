@@ -9,7 +9,7 @@ export interface InitialStateType {
 
 const initialState: InitialStateType = {
   tickets: [],
-  load: true,
+  load: false,
   error: false,
 };
 
@@ -19,12 +19,17 @@ const TicketsReducer = (state = initialState, action: Action) => {
       return {
         ...state,
         tickets: action.tickets,
-        load: action.load,
       };
     case ActionType.SET_ERROR:
       return {
         ...state,
+        load: !state.load,
         error: !state.error,
+      };
+    case ActionType.SET_LOADER:
+      return {
+        ...state,
+        load: action.active,
       };
     default:
       return state;

@@ -14,13 +14,15 @@ interface Props {
   isChecked: number[];
   checkboxes: CheckboxType[];
   check: (id: number) => void;
-  checkAll: () => void;
+  checkAll: (array: [] | number[]) => void;
   checkAutomatic: () => void;
   checkboxAll: boolean;
   unCheck: (id: number) => void;
   unCheckAutomatic: () => void;
-  getTickets: (searchId: string) => void;
+  getTickets: (searchId: string, stops: number[]) => void;
   tickets: ObjectTickets;
+  setLoad: (active: boolean) => void;
+  unCheckAll: () => void;
 }
 
 const Filter: FC<Props> = ({
@@ -33,20 +35,27 @@ const Filter: FC<Props> = ({
   check,
   checkAll,
   getTickets,
+  setLoad,
 }) => {
+  const sendRequest = () => {
+    getSearchId().then((result) => {
+      console.log(isChecked, 'isChecked');
+      getTickets(result.searchId, isChecked);
+    });
+  };
+
   useEffect(() => {
-    if (isChecked.length === checkboxes.length) checkAutomatic();
+    const allCheckboxIsActive = isChecked.length === checkboxes.length;
+    if (allCheckboxIsActive) {
+      checkAutomatic();
+      sendRequest();
+    }
   }, [isChecked]);
 
   useEffect(() => {
-    if (checkboxAll && isChecked.length < checkboxes.length) unCheckAutomatic();
+    const unCheckSomeCheckbox = isChecked.length < checkboxes.length;
+    if (checkboxAll && unCheckSomeCheckbox) unCheckAutomatic();
   }, [checkboxAll, isChecked]);
-
-  const sendRequest = () => {
-    getSearchId().then((result) => {
-      getTickets(result.searchId);
-    });
-  };
 
   return (
     <div className={classes.filter}>
@@ -55,7 +64,18 @@ const Filter: FC<Props> = ({
         <p>КОЛИЧЕСТВО ПЕРЕСАДОК</p>
       </div>
       <label className={checkboxAll ? classes.labelActive : classes.label}>
-        <input className={classes.checkbox} type="checkbox" onChange={checkAll} />
+        <input
+          className={classes.checkbox}
+          type="checkbox"
+          onChange={() => {
+            if (checkboxAll) {
+              checkAll([]);
+            } else {
+              checkAll([...checkboxes.map((checkbox) => checkbox.id)]);
+              setLoad(true);
+            }
+          }}
+        />
         Все
       </label>
       {checkboxes.map((checkbox) => {
@@ -68,7 +88,7 @@ const Filter: FC<Props> = ({
                 if (isChecked.includes(checkbox.id)) unCheck(checkbox.id);
                 if (!isChecked.includes(checkbox.id)) {
                   check(checkbox.id);
-                  sendRequest();
+                  setLoad(true);
                 }
               }}
             />
@@ -93,18 +113,22 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
   const {
     checkActionCreator,
     checkAllActionCreator,
+    setLoad,
     checkAutomaticActionCreator,
     unCheckActionCreator,
     unCheckAutomatic,
+    unCheckAllActionCreator,
   } = bindActionCreators(actions, dispatch);
   const { getTicketsThunk } = bindActionCreators(thunks, dispatch);
   return {
     check: (id: number) => checkActionCreator(id),
-    getTickets: getTicketsThunk,
+    getTickets: (searchId: string, stops: number[]) => getTicketsThunk(searchId, stops),
     unCheck: (id: number) => unCheckActionCreator(id),
     checkAll: checkAllActionCreator,
     checkAutomatic: checkAutomaticActionCreator,
     unCheckAutomatic: unCheckAutomatic,
+    setLoad: setLoad,
+    unCheckAll: unCheckAllActionCreator,
   };
 };
 
