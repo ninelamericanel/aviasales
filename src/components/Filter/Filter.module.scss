@@ -11,6 +11,8 @@
   border-radius: $borderRadius;
   box-shadow: $boxShadow;
 
+  transition-duration: 300ms;
+
   @media screen and (max-width: 960px) {
     width: 100%;
     height: 52px;
@@ -26,17 +28,17 @@
     padding: 0 20px;
 
     @media screen and (max-width: 960px) {
-      margin-bottom: 20px;
       cursor: pointer;
     }
 
     .burger {
       display: none;
-      height: 10px;
-      width: 12px;
 
       @media screen and (max-width: 960px) {
         display: block;
+        margin-bottom: 10px;
+        height: 10px;
+        width: 12px;
       }
     }
   }
@@ -87,4 +89,13 @@
     top: 16px;
     left: 24px;
   }
+}
+
+.filter:hover {
+    @media screen and (max-width: 960px) {
+      width: 100%;
+      height: 252px;
+      //position: absolute;
+      z-index: 1;
+    }
 }
