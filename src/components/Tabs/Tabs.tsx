@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
 
-import { StateType, TabsType, TicketType } from 'types';
+import { StateType, TabsType } from 'types';
 import * as actions from 'store/actionCreators';
 
 import classes from './Tabs.module.scss';
@@ -10,10 +10,9 @@ import classes from './Tabs.module.scss';
 interface Props {
   tabs: TabsType[];
   setTab: (id: number) => void;
-  sort: (callback: (id: number) => number) => void;
 }
 
-const Tabs: FC<Props> = ({ tabs, setTab, sort }) => {
+const Tabs: FC<Props> = ({ tabs, setTab }) => {
   const handleClickTab = (id: number) => {
     setTab(id);
   };
@@ -41,10 +40,9 @@ const mapStateToProps = (state: StateType) => {
 };
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
-  const { setTab, sortActionCreator } = bindActionCreators(actions, dispatch);
+  const { setTab } = bindActionCreators(actions, dispatch);
   return {
     setTab: (id: number) => setTab(id),
-    sort: (callback: (id: number) => number) => sortActionCreator(callback),
   };
 };
 
