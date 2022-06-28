@@ -31,6 +31,13 @@ const sortByDuration = (a: TicketType, b: TicketType) => {
   return -1;
 };
 
+const sortOptimal = (a: TicketType, b: TicketType) => {
+  const durationA = a.segments[0].duration;
+  const durationB = b.segments[0].duration;
+  if (durationA > durationB && a.price > b.price) return 1;
+  return -1;
+};
+
 const TicketsList: FC<Props> = ({ tabs, tickets, loading, errorStatus }) => {
   const activeTab = tabs.reduce((id: number, tab) => {
     if (tab.isActive) id += tab.id;
@@ -38,6 +45,7 @@ const TicketsList: FC<Props> = ({ tabs, tickets, loading, errorStatus }) => {
   }, 0);
   if (activeTab === 1) tickets.sort(sortByPrice);
   if (activeTab === 2) tickets.sort(sortByDuration);
+  if (activeTab === 3) tickets.sort(sortOptimal);
   const spinner =
     loading && !errorStatus ? (
       <Box sx={{ width: '100%' }}>
