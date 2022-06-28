@@ -1,29 +1,13 @@
 import React, { FC } from 'react';
 
 import { TicketType } from 'types';
+import { arrivalTimeCalculation, checkingSuffix, formatTime } from 'helper';
 
 import classes from './Ticket.module.scss';
 
 interface Props {
   ticket: TicketType;
 }
-
-const checkingSuffix = (length: number) => {
-  if (length === 0) return 'Без пересадок';
-  if (length === 1) return `${length} пересадка`;
-  if (length > 1 && length < 5) return `${length} пересадки`;
-};
-
-const formatTime = (time: number) => {
-  if (time < 10) return `0${time}`;
-  return `${time}`;
-};
-
-const arrivalTimeCalculation = (date: string, duration: number): string => {
-  const time = new Date(date);
-  const arrivedTime = new Date(time.setMinutes(time.getMinutes() + duration));
-  return `${formatTime(arrivedTime.getHours())}:${formatTime(arrivedTime.getMinutes())}`;
-};
 
 const Ticket: FC<Props> = ({ ticket: { price, carrier, segments } }) => {
   const wayTo = segments[0];
@@ -39,52 +23,36 @@ const Ticket: FC<Props> = ({ ticket: { price, carrier, segments } }) => {
           <img src={`https://pics.avs.io/99/36/${carrier}.png`}></img>
         </div>
       </div>
-      <table className={classes.table}>
-        <thead>
-          <tr>
-            <td>
-              {wayTo.origin} - {wayTo.destination}
-            </td>
-            <td>В пути</td>
-            <td>{checkingSuffix(wayTo.stops.length)}</td>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              {formatTime(new Date(wayTo.date).getHours())}:{formatTime(new Date(wayTo.date).getMinutes())} -{' '}
-              {arrivalTimeCalculation(wayTo.date, wayTo.duration)}
-            </td>
-            <td>
-              {Math.floor(wayTo.duration / 60)}ч {wayTo.duration % 60}м
-            </td>
-            <td>{wayTo.stops.join(', ')}</td>
-          </tr>
-        </tbody>
-      </table>
-      <table className={classes.table}>
-        <thead>
-          <tr>
-            <th>
-              {wayFrom.origin} - {wayFrom.destination}
-            </th>
-            <th>В пути</th>
-            <th>{checkingSuffix(wayFrom.stops.length)}</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              {formatTime(new Date(wayFrom.date).getHours())}:{formatTime(new Date(wayFrom.date).getMinutes())} -{' '}
-              {arrivalTimeCalculation(wayFrom.date, wayFrom.duration)}
-            </td>
-            <td>
-              {Math.floor(wayFrom.duration / 60)}ч {wayFrom.duration % 60}м
-            </td>
-            <td>{wayFrom.stops.join(', ')}</td>
-          </tr>
-        </tbody>
-      </table>
+      <div className={classes.table}>
+        <div className={classes.thead1}>
+          {wayTo.origin} - {wayTo.destination}
+        </div>
+        <div className={classes.tbody1}>
+          {formatTime(new Date(wayTo.date).getHours())}:{formatTime(new Date(wayTo.date).getMinutes())} -{' '}
+          {arrivalTimeCalculation(wayTo.date, wayTo.duration)}{' '}
+        </div>
+        <div className={classes.thead2}>В пути</div>
+        <div className={classes.tbody2}>
+          {Math.floor(wayTo.duration / 60)}ч {wayTo.duration % 60}
+        </div>
+        <div className={classes.thead3}>{checkingSuffix(wayTo.stops.length)}</div>
+        <div className={classes.tbody3}>{wayTo.stops.join(', ')}</div>
+      </div>
+      <div className={classes.table}>
+        <div className={classes.thead1}>
+          {wayFrom.origin} - {wayTo.destination}
+        </div>
+        <div className={classes.tbody1}>
+          {formatTime(new Date(wayFrom.date).getHours())}:{formatTime(new Date(wayFrom.date).getMinutes())} -{' '}
+          {arrivalTimeCalculation(wayFrom.date, wayFrom.duration)}
+        </div>
+        <div className={classes.thead2}>В пути</div>
+        <div className={classes.tbody2}>
+          {Math.floor(wayFrom.duration / 60)}ч {wayFrom.duration % 60}м
+        </div>
+        <div className={classes.thead3}>{checkingSuffix(wayFrom.stops.length)}</div>
+        <div className={classes.tbody3}>{wayFrom.stops.join(', ')}</div>
+      </div>
     </>
   );
 };
