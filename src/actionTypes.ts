@@ -13,7 +13,6 @@ export enum ActionType {
   FILTER_TICKETS = 'FILTER_TICKETS',
   SET_IDS_TICKETS = 'SET_IDS_TICKETS',
   UNCHECK_ALL = 'UNCHECK_ALL',
-  SORT = 'SORT',
 }
 
 interface ActionCheck {
@@ -64,25 +63,12 @@ interface ActionFilterTickets {
   ids: string[];
 }
 
-interface ActionSetIdsTickets {
-  type: ActionType.SET_IDS_TICKETS;
-  ids: string[];
-  idCheckbox: number;
-}
-
 interface ActionUnCheckAll {
   type: ActionType.UNCHECK_ALL;
 }
 
-interface ActionSort {
-  type: ActionType.SORT;
-  callback: (id: number) => number;
-}
-
 export type Action =
-  | ActionSort
   | ActionUnCheckAll
-  | ActionSetIdsTickets
   | ActionFilterTickets
   | ActionUnCkeckAutomatic
   | ActionUnCheck

@@ -22,7 +22,6 @@ interface Props {
   getTickets: (searchId: string, stops: number[]) => void;
   tickets: ObjectTickets;
   setLoad: (active: boolean) => void;
-  unCheckAll: () => void;
 }
 
 const Filter: FC<Props> = ({
@@ -39,7 +38,6 @@ const Filter: FC<Props> = ({
 }) => {
   const sendRequest = () => {
     getSearchId().then((result) => {
-      console.log(isChecked, 'isChecked');
       getTickets(result.searchId, isChecked);
     });
   };
@@ -48,14 +46,28 @@ const Filter: FC<Props> = ({
     const allCheckboxIsActive = isChecked.length === checkboxes.length;
     if (allCheckboxIsActive) {
       checkAutomatic();
-      sendRequest();
     }
+    sendRequest();
   }, [isChecked]);
 
   useEffect(() => {
     const unCheckSomeCheckbox = isChecked.length < checkboxes.length;
     if (checkboxAll && unCheckSomeCheckbox) unCheckAutomatic();
   }, [checkboxAll, isChecked]);
+
+  const handleCheckFilter = (id: number) => {
+    check(id);
+    setLoad(true);
+  };
+
+  const handleCheckAllFilter = () => {
+    if (checkboxAll) {
+      checkAll([]);
+    } else {
+      checkAll([...checkboxes.map((checkbox) => checkbox.id)]);
+      setLoad(true);
+    }
+  };
 
   return (
     <div className={classes.filter}>
@@ -64,33 +76,16 @@ const Filter: FC<Props> = ({
         <p>КОЛИЧЕСТВО ПЕРЕСАДОК</p>
       </div>
       <label className={checkboxAll ? classes.labelActive : classes.label}>
-        <input
-          className={classes.checkbox}
-          type="checkbox"
-          onChange={() => {
-            if (checkboxAll) {
-              checkAll([]);
-            } else {
-              checkAll([...checkboxes.map((checkbox) => checkbox.id)]);
-              setLoad(true);
-            }
-          }}
-        />
+        <input className={classes.checkbox} type="checkbox" onChange={handleCheckAllFilter} />
         Все
       </label>
       {checkboxes.map((checkbox) => {
         return (
-          <label key={checkbox.id} className={isChecked.includes(checkbox.id) ? classes.labelActive : classes.label}>
+          <label key={checkbox.id} className={checkbox.isChecked ? classes.labelActive : classes.label}>
             <input
               className={classes.checkbox}
               type="checkbox"
-              onChange={() => {
-                if (isChecked.includes(checkbox.id)) unCheck(checkbox.id);
-                if (!isChecked.includes(checkbox.id)) {
-                  check(checkbox.id);
-                  setLoad(true);
-                }
-              }}
+              onChange={() => (checkbox.isChecked ? unCheck(checkbox.id) : handleCheckFilter(checkbox.id))}
             />
             {checkbox.name}
           </label>
@@ -117,7 +112,6 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
     checkAutomaticActionCreator,
     unCheckActionCreator,
     unCheckAutomatic,
-    unCheckAllActionCreator,
   } = bindActionCreators(actions, dispatch);
   const { getTicketsThunk } = bindActionCreators(thunks, dispatch);
   return {
@@ -128,7 +122,6 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
     checkAutomatic: checkAutomaticActionCreator,
     unCheckAutomatic: unCheckAutomatic,
     setLoad: setLoad,
-    unCheckAll: unCheckAllActionCreator,
   };
 };
 

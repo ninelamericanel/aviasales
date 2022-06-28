@@ -7,6 +7,7 @@ import { TicketType } from '../types';
 import { setErrorActionCreator, setLoad, setTicketsActionCreator } from './actionCreators';
 
 export const getTicketsThunk = (searchId: string, stops: number[]) => {
+  console.log('csssssssssssssssssssssssssssssssssssall', stops);
   return (dispatch: Dispatch) => {
     getTickets(searchId)
       .then((result) => {
