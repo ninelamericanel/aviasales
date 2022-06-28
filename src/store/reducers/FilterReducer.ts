@@ -45,9 +45,12 @@ const FilterReducer = (state = initialState, action: Action) => {
         ...state,
         checkboxAll: !state.checkboxAll,
         isChecked: action.array,
-        checkboxes: checkboxes.map((item) =>
-          item.isChecked ? { ...item, isChecked: false } : { ...item, isChecked: true }
-        ),
+        checkboxes: checkboxes.map((item) => {
+          return {
+            ...item,
+            isChecked: action.statusForCheckbox,
+          };
+        }),
       };
     case ActionType.CHECK_AUTOMATIC:
       return {

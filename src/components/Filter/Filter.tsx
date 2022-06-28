@@ -14,14 +14,13 @@ interface Props {
   isChecked: number[];
   checkboxes: CheckboxType[];
   check: (id: number) => void;
-  checkAll: (array: [] | number[]) => void;
+  checkAll: (array: [] | number[], statusForCheckbox: boolean) => void;
   checkAutomatic: () => void;
   checkboxAll: boolean;
   unCheck: (id: number) => void;
   unCheckAutomatic: () => void;
   getTickets: (searchId: string, stops: number[]) => void;
   tickets: ObjectTickets;
-  setLoad: (active: boolean) => void;
 }
 
 const Filter: FC<Props> = ({
@@ -34,7 +33,6 @@ const Filter: FC<Props> = ({
   check,
   checkAll,
   getTickets,
-  setLoad,
 }) => {
   const sendRequest = () => {
     getSearchId().then((result) => {
@@ -47,7 +45,7 @@ const Filter: FC<Props> = ({
     if (allCheckboxIsActive) {
       checkAutomatic();
     }
-    sendRequest();
+    if (isChecked.length > 0) sendRequest();
   }, [isChecked]);
 
   useEffect(() => {
@@ -55,17 +53,11 @@ const Filter: FC<Props> = ({
     if (checkboxAll && unCheckSomeCheckbox) unCheckAutomatic();
   }, [checkboxAll, isChecked]);
 
-  const handleCheckFilter = (id: number) => {
-    check(id);
-    setLoad(true);
-  };
-
   const handleCheckAllFilter = () => {
     if (checkboxAll) {
-      checkAll([]);
+      checkAll([], false);
     } else {
-      checkAll([...checkboxes.map((checkbox) => checkbox.id)]);
-      setLoad(true);
+      checkAll([...checkboxes.map((checkbox) => checkbox.id)], true);
     }
   };
 
@@ -85,7 +77,7 @@ const Filter: FC<Props> = ({
             <input
               className={classes.checkbox}
               type="checkbox"
-              onChange={() => (checkbox.isChecked ? unCheck(checkbox.id) : handleCheckFilter(checkbox.id))}
+              onChange={() => (checkbox.isChecked ? unCheck(checkbox.id) : check(checkbox.id))}
             />
             {checkbox.name}
           </label>
@@ -108,7 +100,6 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
   const {
     checkActionCreator,
     checkAllActionCreator,
-    setLoad,
     checkAutomaticActionCreator,
     unCheckActionCreator,
     unCheckAutomatic,
@@ -121,7 +112,6 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
     checkAll: checkAllActionCreator,
     checkAutomatic: checkAutomaticActionCreator,
     unCheckAutomatic: unCheckAutomatic,
-    setLoad: setLoad,
   };
 };
 

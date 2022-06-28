@@ -11,7 +11,6 @@ export enum ActionType {
   UNCHECK = 'UNCHECK',
   UNCHECK_AUTOMATIC = 'UNCHECK_AUTOMATIC',
   FILTER_TICKETS = 'FILTER_TICKETS',
-  SET_IDS_TICKETS = 'SET_IDS_TICKETS',
   UNCHECK_ALL = 'UNCHECK_ALL',
 }
 
@@ -28,6 +27,7 @@ interface ActionUnCheck {
 interface ActionCheckAll {
   type: ActionType.CHECK_ALL;
   array: [] | number[];
+  statusForCheckbox: boolean;
 }
 
 interface ActionCheckAutomatic {
@@ -51,6 +51,7 @@ interface ActionSetLoader {
 
 interface ActionSetError {
   type: ActionType.SET_ERROR;
+  error: boolean;
 }
 
 interface ActionUnCkeckAutomatic {
