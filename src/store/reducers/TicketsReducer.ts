@@ -24,7 +24,7 @@ const TicketsReducer = (state = initialState, action: Action) => {
       return {
         ...state,
         load: !state.load,
-        error: !state.error,
+        error: action.error,
       };
     case ActionType.SET_LOADER:
       return {

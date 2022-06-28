@@ -6,6 +6,7 @@ import LinearProgress from '@mui/material/LinearProgress';
 
 import classesTabs from 'components/Tabs/Tabs.module.scss';
 import { CheckboxType, StateType, TabsType, TicketType } from 'types';
+import { createIdForTicket, sortingTickets } from 'helper';
 
 import { Ticket } from '../Ticket';
 
@@ -20,32 +21,12 @@ interface Props {
   tabs: TabsType[];
 }
 
-const sortByPrice = (a: TicketType, b: TicketType) => {
-  if (a.price > b.price) return 1;
-  return -1;
-};
-const sortByDuration = (a: TicketType, b: TicketType) => {
-  const durationA = a.segments[0].duration;
-  const durationB = b.segments[0].duration;
-  if (durationA > durationB) return 1;
-  return -1;
-};
-
-const sortOptimal = (a: TicketType, b: TicketType) => {
-  const durationA = a.segments[0].duration;
-  const durationB = b.segments[0].duration;
-  if (durationA > durationB && a.price > b.price) return 1;
-  return -1;
-};
-
-const TicketsList: FC<Props> = ({ tabs, tickets, loading, errorStatus }) => {
+const TicketsList: FC<Props> = ({ checkedCheckboxes, tabs, tickets, loading, errorStatus }) => {
   const activeTab = tabs.reduce((id: number, tab) => {
     if (tab.isActive) id += tab.id;
     return id;
   }, 0);
-  if (activeTab === 1) tickets.sort(sortByPrice);
-  if (activeTab === 2) tickets.sort(sortByDuration);
-  if (activeTab === 3) tickets.sort(sortOptimal);
+  if (activeTab) sortingTickets(activeTab, tickets);
   const spinner =
     loading && !errorStatus ? (
       <Box sx={{ width: '100%' }}>
@@ -56,22 +37,25 @@ const TicketsList: FC<Props> = ({ tabs, tickets, loading, errorStatus }) => {
     <Alert type="error" message="Возникла ошибка! Попробуйте перезагрузить страницу" />
   ) : null;
   const ticketsNodes = tickets.map((ticket: TicketType) => {
-    const id = new Date(ticket.segments[0].date).getTime() + ticket.segments[0].duration;
+    const infoTicket = ticket.segments[0];
+    const id = createIdForTicket(infoTicket.date, infoTicket.duration);
     return (
       <li key={id} className={classes.ticket}>
         <Ticket ticket={ticket} />
       </li>
     );
   });
-  const ticketsView = tickets.length ? (
-    ticketsNodes
-  ) : (
+  const notFound = checkedCheckboxes.length ? null : (
     <Alert type="info" message="Рейсов, подходящих под заданные фильтры, не найдено" />
   );
+  const ticketsView = !errorStatus && checkedCheckboxes.length ? ticketsNodes : null;
 
   return (
     <>
-      <ul className={classes.list}>{spinner || ticketsView || errorMessage}</ul>
+      <ul className={classes.list}>
+        {spinner}
+        {ticketsView || errorMessage || notFound}
+      </ul>
       <button className={classesTabs.btn && classes.btnLong}>Показать еще 5 билетов</button>
     </>
   );
