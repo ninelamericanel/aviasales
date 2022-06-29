@@ -13,9 +13,6 @@ interface Props {
 }
 
 const Tabs: FC<Props> = ({ tabs, setTab }) => {
-  const handleClickTab = (id: number) => {
-    setTab(id);
-  };
   return (
     <div className={classes.tabs}>
       {tabs.map((tab) => {
@@ -23,7 +20,7 @@ const Tabs: FC<Props> = ({ tabs, setTab }) => {
           <button
             key={tab.id}
             className={tab.isActive ? classes.btnActive : classes.btn}
-            onClick={() => handleClickTab(tab.id)}
+            onClick={() => setTab(tab.id)}
           >
             {tab.name}
           </button>

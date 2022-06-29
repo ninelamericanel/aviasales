@@ -54,7 +54,7 @@ interface ActionSetError {
   error: boolean;
 }
 
-interface ActionUnCkeckAutomatic {
+interface ActionUnCheckAutomatic {
   type: ActionType.UNCHECK_AUTOMATIC;
 }
 
@@ -71,7 +71,7 @@ interface ActionUnCheckAll {
 export type Action =
   | ActionUnCheckAll
   | ActionFilterTickets
-  | ActionUnCkeckAutomatic
+  | ActionUnCheckAutomatic
   | ActionUnCheck
   | ActionSetLoader
   | ActionSetTickets
