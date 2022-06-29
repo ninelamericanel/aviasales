@@ -55,7 +55,7 @@ const TicketsList: FC<Props> = ({ checkedCheckboxes, tabs, tickets, loading, err
         {spinner}
         {ticketsView || errorMessage || notFound}
       </ul>
-      <button className={classesTabs.btn && classes.btnLong}>Показать еще 5 билетов</button>
+      {/*<button className={classesTabs.btn && classes.btnLong}>Показать еще 5 билетов</button>*/}
     </>
   );
 };
