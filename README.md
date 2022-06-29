@@ -1,1 +1,1 @@
-https://avs-eight.vercel.app/
+https://aviasales-vercel.vercel.app/
