@@ -4,7 +4,6 @@ import { Alert } from 'antd';
 import Box from '@mui/material/Box';
 import LinearProgress from '@mui/material/LinearProgress';
 
-import classesTabs from 'components/Tabs/Tabs.module.scss';
 import { CheckboxType, StateType, TabsType, TicketType } from 'types';
 import { createIdForTicket, sortingTickets } from 'helper';
 import { Ticket } from 'components/Ticket';
