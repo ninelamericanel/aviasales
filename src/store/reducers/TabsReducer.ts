@@ -7,7 +7,7 @@ interface InitialState {
 
 const initialState: InitialState = {
   tabs: [
-    { id: 1, name: 'САМЫЙ ДЕШЕВЫЙ', isActive: false },
+    { id: 1, name: 'САМЫЙ ДЕШЕВЫЙ', isActive: true },
     { id: 2, name: 'САМЫЙ БЫСТРЫЙ', isActive: false },
     { id: 3, name: 'ОПТИМАЛЬНЫЙ', isActive: false },
   ],
