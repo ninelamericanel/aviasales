@@ -1,26 +1,23 @@
 import { Dispatch } from 'redux';
 
-import { getTickets } from 'services/ticketServices';
-
-import { TicketType } from '../types';
+import { ticketsAPI } from '../services';
 
 import { setErrorActionCreator, setLoad, setTicketsActionCreator } from './actionCreators';
 
-export const getTicketsThunk = (searchId: string, stops: number[]) => {
-  return (dispatch: Dispatch) => {
-    dispatch(setErrorActionCreator(false));
-    dispatch(setLoad(true));
-    getTickets(searchId)
-      .then((result) => {
-        const filterTickets = result.tickets.filter((ticket: TicketType) =>
-          stops.includes(ticket.segments[0].stops.length)
-        );
-        dispatch(setTicketsActionCreator(filterTickets));
-        dispatch(setLoad(false));
-      })
-      .catch(() => {
-        dispatch(setErrorActionCreator(true));
-        dispatch(setLoad(false));
-      });
+export const getTicketsThunk = () => {
+  return async (dispatch: Dispatch) => {
+    try {
+      const searchId = await ticketsAPI.getSearchId();
+      let result = await ticketsAPI.getTickets(searchId);
+      dispatch(setLoad(true));
+      dispatch(setTicketsActionCreator(result.tickets));
+      while (!result.stop) {
+        result = await ticketsAPI.getTickets(searchId);
+        dispatch(setTicketsActionCreator(result.tickets));
+      }
+      if (result.stop) dispatch(setLoad(false));
+    } catch {
+      dispatch(setErrorActionCreator(true));
+    }
   };
 };
