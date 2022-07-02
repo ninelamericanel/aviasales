@@ -12,25 +12,21 @@ interface SearchIdResponse {
 
 interface TicketsResponse {
   tickets: TicketType[];
-  stops: boolean;
+  stop: boolean;
 }
 
 export const ticketsAPI = {
   getSearchId() {
     return instance.get<SearchIdResponse>('search').then((res) => res.data.searchId);
   },
-  getTickets(searchId: string) {
-    return instance.get<TicketsResponse>(`tickets?searchId=${searchId}`).then((res) => res.data);
+  // @ts-ignore
+  async getTickets(searchId: string, call = 0) {
+    try {
+      let response = await instance.get<TicketsResponse>(`tickets?searchId=${searchId}`);
+      return response.data;
+    } catch (error) {
+      if (call == 3) throw new Error('Something wrong happened');
+      return this.getTickets(searchId, ++call);
+    }
   },
 };
-
-// export const getSearchId = async () => {
-//   const response = await fetch('https://aviasales-test-api.kata.academy/search');
-//   return response.json();
-// };
-//
-// export const getTickets = async (searchId: string) => {
-//   const response = await fetch(`https://aviasales-test-api.kata.academy/tickets?searchId=${searchId}`);
-//   if (!response.ok) throw new Error(`Something wrong happen, ${response.status}`);
-//   return response.json();
-// };
