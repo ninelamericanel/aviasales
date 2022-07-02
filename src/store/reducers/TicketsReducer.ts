@@ -18,7 +18,7 @@ const TicketsReducer = (state = initialState, action: Action) => {
     case ActionType.SET_TICKETS:
       return {
         ...state,
-        tickets: action.tickets,
+        tickets: [...state.tickets, ...action.tickets],
       };
     case ActionType.SET_ERROR:
       return {
