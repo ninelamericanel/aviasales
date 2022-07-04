@@ -6,6 +6,7 @@ export interface InitialStateType {
   tickets: TicketType[];
   countTicketsView: number;
   load: boolean;
+  preloading: boolean;
   error: boolean;
 }
 
@@ -13,6 +14,7 @@ const initialState: InitialStateType = {
   countTicketsView: 5,
   tickets: [],
   load: false,
+  preloading: true,
   error: false,
 };
 
@@ -39,6 +41,11 @@ const TicketsReducer = (state = initialState, action: Action) => {
       return {
         ...state,
         load: action.active,
+      };
+    case ActionType.SET_PRELOADING:
+      return {
+        ...state,
+        preloading: false,
       };
     default:
       return state;

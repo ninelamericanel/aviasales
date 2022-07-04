@@ -22,6 +22,7 @@ export interface StateType {
   TicketsReducer: {
     tickets: TicketType[];
     load: boolean;
+    preloading: boolean;
     error: boolean;
     countTicketsView: number;
   };

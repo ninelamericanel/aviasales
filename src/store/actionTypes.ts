@@ -60,7 +60,12 @@ interface ActionUnCheckAll {
   type: ActionType.UNCHECK_ALL;
 }
 
+interface ActionSetPreloading {
+  type: ActionType.SET_PRELOADING;
+}
+
 export type Action =
+  | ActionSetPreloading
   | ActionIncViewTickets
   | ActionUnCheckAll
   | ActionFilterTickets

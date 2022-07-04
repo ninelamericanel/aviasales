@@ -20,4 +20,5 @@ export const setTickets = (tickets: TicketType[]) => ({
 });
 export const setError = (error: boolean) => ({ type: ActionType.SET_ERROR, error });
 export const setLoad = (active: boolean) => ({ type: ActionType.SET_LOADER, active });
+export const setPreloading = () => ({ type: ActionType.SET_PRELOADING });
 export const incViewTickets = (count?: number) => ({ type: ActionType.INC_VIEW_TICKETS, count });

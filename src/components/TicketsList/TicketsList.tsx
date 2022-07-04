@@ -1,6 +1,6 @@
 import { FC, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Alert } from 'antd';
+import { Alert, Spin } from 'antd';
 import Box from '@mui/material/Box';
 import uniqid from 'uniqid';
 import LinearProgress from '@mui/material/LinearProgress';
@@ -13,6 +13,7 @@ import { sortingTickets } from 'helper';
 import { Ticket } from 'components/Ticket';
 import classesTabs from 'components/Tabs/Tabs.module.scss';
 
+import 'antd/dist/antd.css';
 import classes from './TicketsList.module.scss';
 
 interface Props {
@@ -25,6 +26,7 @@ interface Props {
   getTickets: () => void;
   incViewTickets: (count?: number) => void;
   countTickets: number;
+  preloading: boolean;
 }
 
 interface PropsTicketsList {
@@ -57,6 +59,7 @@ const TicketsListContainer: FC<Props> = ({
   errorStatus,
   checkedCheckboxes,
   countTickets,
+  preloading,
 }) => {
   useEffect(() => {
     getTickets();
@@ -64,6 +67,7 @@ const TicketsListContainer: FC<Props> = ({
   useEffect(() => {
     incViewTickets(5);
   }, [tabs, checkedCheckboxes]);
+  const preloadingView = preloading ? <Spin className={classes.spin} size="large" /> : null;
   let filtredTickets = tickets;
   const activeTab = tabs.reduce((id: number, tab) => {
     if (tab.isActive) id += tab.id;
@@ -96,6 +100,7 @@ const TicketsListContainer: FC<Props> = ({
   ) : null;
   return (
     <div className={classes.container}>
+      {preloadingView}
       {spinner || errorMessage}
       {viewTickets}
       {btn}
@@ -112,6 +117,7 @@ const mapStateToProps = (state: StateType) => {
     errorStatus: state.TicketsReducer.error,
     tabs: state.TabsReducer.tabs,
     countTickets: state.TicketsReducer.countTicketsView,
+    preloading: state.TicketsReducer.preloading,
   };
 };
 
