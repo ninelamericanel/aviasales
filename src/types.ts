@@ -23,6 +23,7 @@ export interface StateType {
     tickets: TicketType[];
     load: boolean;
     error: boolean;
+    countTicketsView: number;
   };
 }
 

@@ -21,3 +21,4 @@ export const setTicketsActionCreator = (tickets: ObjectTickets) => ({
 });
 export const setErrorActionCreator = (error: boolean) => ({ type: ActionType.SET_ERROR, error });
 export const setLoad = (active: boolean) => ({ type: ActionType.SET_LOADER, active });
+export const incViewTickets = () => ({ type: ActionType.INC_VIEW_TICKETS });

@@ -12,6 +12,11 @@ export enum ActionType {
   UNCHECK_AUTOMATIC = 'UNCHECK_AUTOMATIC',
   FILTER_TICKETS = 'FILTER_TICKETS',
   UNCHECK_ALL = 'UNCHECK_ALL',
+  INC_VIEW_TICKETS = 'INC_VIEW_TICKETS',
+}
+
+interface ActionIncViewTickets {
+  type: ActionType.INC_VIEW_TICKETS;
 }
 
 interface ActionCheck {
@@ -69,6 +74,7 @@ interface ActionUnCheckAll {
 }
 
 export type Action =
+  | ActionIncViewTickets
   | ActionUnCheckAll
   | ActionFilterTickets
   | ActionUnCheckAutomatic
