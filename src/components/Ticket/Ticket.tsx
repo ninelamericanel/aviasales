@@ -24,34 +24,34 @@ const Ticket: FC<Props> = ({ ticket: { price, carrier, segments } }) => {
         </div>
       </div>
       <div className={classes.table}>
-        <div className={classes.thead1}>
+        <div className={`${classes.thead1} ${classes.thead}`}>
           {wayTo.origin} - {wayTo.destination}
         </div>
-        <div className={classes.tbody1}>
+        <div className={`${classes.tbody1} ${classes.tbody}`}>
           {formatTime(new Date(wayTo.date).getHours())}:{formatTime(new Date(wayTo.date).getMinutes())} -{' '}
           {arrivalTimeCalculation(wayTo.date, wayTo.duration)}{' '}
         </div>
-        <div className={classes.thead2}>В пути</div>
-        <div className={classes.tbody2}>
+        <div className={`${classes.thead2} ${classes.thead}`}>В пути</div>
+        <div className={`${classes.tbody2} ${classes.tbody}`}>
           {Math.floor(wayTo.duration / 60)}ч {wayTo.duration % 60}
         </div>
-        <div className={classes.thead3}>{checkingSuffix(wayTo.stops.length)}</div>
-        <div className={classes.tbody3}>{wayTo.stops.join(', ')}</div>
+        <div className={`${classes.thead3} ${classes.thead}`}>{checkingSuffix(wayTo.stops.length)}</div>
+        <div className={`${classes.tbody3} ${classes.tbody}`}>{wayTo.stops.join(', ')}</div>
       </div>
       <div className={classes.table}>
-        <div className={classes.thead1}>
+        <div className={`${classes.thead1} ${classes.thead}`}>
           {wayFrom.origin} - {wayTo.destination}
         </div>
-        <div className={classes.tbody1}>
+        <div className={`${classes.tbody1} ${classes.tbody}`}>
           {formatTime(new Date(wayFrom.date).getHours())}:{formatTime(new Date(wayFrom.date).getMinutes())} -{' '}
           {arrivalTimeCalculation(wayFrom.date, wayFrom.duration)}
         </div>
-        <div className={classes.thead2}>В пути</div>
-        <div className={classes.tbody2}>
+        <div className={`${classes.thead2} ${classes.thead}`}>В пути</div>
+        <div className={`${classes.tbody2} ${classes.tbody}`}>
           {Math.floor(wayFrom.duration / 60)}ч {wayFrom.duration % 60}м
         </div>
-        <div className={classes.thead3}>{checkingSuffix(wayFrom.stops.length)}</div>
-        <div className={classes.tbody3}>{wayFrom.stops.join(', ')}</div>
+        <div className={`${classes.thead3} ${classes.thead}`}>{checkingSuffix(wayFrom.stops.length)}</div>
+        <div className={`${classes.tbody3} ${classes.tbody}`}>{wayFrom.stops.join(', ')}</div>
       </div>
     </>
   );

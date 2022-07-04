@@ -28,39 +28,37 @@
                         'body1 body2 body3';
 }
 
-.thead1 {
-  grid-area: head1;
+.thead {
   color: #A0B0B9;
   line-height: 18px;
 }
 
-.tbody1 {
+.tbody {
   font-size: 14px;
   line-height: 21px;
+}
+
+.thead1 {
+  grid-area: head1;
+}
+
+.tbody1 {
   grid-area: body1;
 }
 
 .thead2 {
   grid-area: head2;
-  color: #A0B0B9;
-  line-height: 18px;
 }
 
 .tbody2 {
-  font-size: 14px;
-  line-height: 21px;
   grid-area: body2;
 }
 
 .thead3 {
   grid-area: head3;
-  color: #A0B0B9;
-  line-height: 18px;
 }
 
 .tbody3 {
-  font-size: 14px;
-  line-height: 21px;
   grid-area: body3;
 }
 
