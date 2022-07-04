@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
 
 import { CheckboxType, StateType } from 'types';
-import * as actions from 'store/actionCreators';
+import * as actions from 'store/actions';
 
 import classes from './Filter.module.scss';
 import burger from './burger.svg';
@@ -85,18 +85,12 @@ const mapStateToProps = (state: StateType) => {
 };
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
-  const {
-    checkActionCreator,
-    checkAllActionCreator,
-    checkAutomaticActionCreator,
-    unCheckActionCreator,
-    unCheckAutomatic,
-  } = bindActionCreators(actions, dispatch);
+  const { check, checkAll, checkAutomatic, unCheck, unCheckAutomatic } = bindActionCreators(actions, dispatch);
   return {
-    check: (id: number) => checkActionCreator(id),
-    unCheck: (id: number) => unCheckActionCreator(id),
-    checkAll: checkAllActionCreator,
-    checkAutomatic: checkAutomaticActionCreator,
+    check: (id: number) => check(id),
+    unCheck: (id: number) => unCheck(id),
+    checkAll: checkAll,
+    checkAutomatic: checkAutomatic,
     unCheckAutomatic: unCheckAutomatic,
   };
 };

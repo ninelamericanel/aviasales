@@ -7,7 +7,7 @@ import LinearProgress from '@mui/material/LinearProgress';
 import { bindActionCreators, Dispatch } from 'redux';
 
 import * as thunks from 'store/thunks';
-import * as action from 'store/actionCreators';
+import * as action from 'store/actions';
 import { CheckboxType, StateType, TabsType, TicketType } from 'types';
 import { sortingTickets } from 'helper';
 import { Ticket } from 'components/Ticket';

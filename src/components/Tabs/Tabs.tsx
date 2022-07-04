@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
 
 import { StateType, TabsType } from 'types';
-import * as actions from 'store/actionCreators';
+import * as actions from 'store/actions';
 
 import classes from './Tabs.module.scss';
 

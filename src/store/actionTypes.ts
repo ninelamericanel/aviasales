@@ -1,19 +1,5 @@
-import { TicketType } from './types';
-
-export enum ActionType {
-  CHECK = 'CHECK',
-  CHECK_ALL = 'CHECK_ALL',
-  CHECK_AUTOMATIC = 'CHECK_AUTOMATIC',
-  SET_TAB = 'SET_TAB',
-  SET_TICKETS = 'SET_TICKETS',
-  SET_LOADER = 'SET_LOADER',
-  SET_ERROR = 'SET_ERROR',
-  UNCHECK = 'UNCHECK',
-  UNCHECK_AUTOMATIC = 'UNCHECK_AUTOMATIC',
-  FILTER_TICKETS = 'FILTER_TICKETS',
-  UNCHECK_ALL = 'UNCHECK_ALL',
-  INC_VIEW_TICKETS = 'INC_VIEW_TICKETS',
-}
+import { ActionType } from 'store/constants';
+import { TicketType } from 'types';
 
 interface ActionIncViewTickets {
   type: ActionType.INC_VIEW_TICKETS;

@@ -27,10 +27,6 @@ export interface StateType {
   };
 }
 
-export interface ObjectTickets {
-  [key: number]: TicketType;
-}
-
 export interface TicketType {
   // Цена в рублях
   price: number;

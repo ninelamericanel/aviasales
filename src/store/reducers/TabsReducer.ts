@@ -1,4 +1,5 @@
-import { Action, ActionType } from 'actionTypes';
+import { ActionType } from 'store/constants';
+import { Action } from 'store/actionTypes';
 import { TabsType } from 'types';
 
 interface InitialState {

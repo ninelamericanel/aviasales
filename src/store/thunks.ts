@@ -2,7 +2,7 @@ import { Dispatch } from 'redux';
 
 import { ticketsAPI } from '../services';
 
-import { setErrorActionCreator, setLoad, setTicketsActionCreator } from './actionCreators';
+import { setError, setLoad, setTickets } from './actions';
 
 export const getTicketsThunk = () => {
   return async (dispatch: Dispatch) => {
@@ -10,14 +10,14 @@ export const getTicketsThunk = () => {
       const searchId = await ticketsAPI.getSearchId();
       let result = await ticketsAPI.getTickets(searchId);
       dispatch(setLoad(true));
-      dispatch(setTicketsActionCreator(result.tickets));
+      dispatch(setTickets(result.tickets));
       while (!result.stop) {
         result = await ticketsAPI.getTickets(searchId);
-        dispatch(setTicketsActionCreator(result.tickets));
+        dispatch(setTickets(result.tickets));
       }
       if (result.stop) dispatch(setLoad(false));
     } catch {
-      dispatch(setErrorActionCreator(true));
+      dispatch(setError(true));
     }
   };
 };
