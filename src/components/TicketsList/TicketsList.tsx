@@ -2,13 +2,14 @@ import { FC, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Alert } from 'antd';
 import Box from '@mui/material/Box';
+import uniqid from 'uniqid';
 import LinearProgress from '@mui/material/LinearProgress';
 import { bindActionCreators, Dispatch } from 'redux';
 
 import * as thunks from 'store/thunks';
 import * as action from 'store/actionCreators';
 import { CheckboxType, StateType, TabsType, TicketType } from 'types';
-import { createIdForTicket, sortingTickets } from 'helper';
+import { sortingTickets } from 'helper';
 import { Ticket } from 'components/Ticket';
 import classesTabs from 'components/Tabs/Tabs.module.scss';
 
@@ -22,7 +23,7 @@ interface Props {
   checkedCheckboxes: number[];
   tabs: TabsType[];
   getTickets: () => void;
-  incViewTickets: () => void;
+  incViewTickets: (count?: number) => void;
   countTickets: number;
 }
 
@@ -33,10 +34,8 @@ interface PropsTicketsList {
 
 const TicketsList: FC<PropsTicketsList> = ({ tickets, maxViewTickets }) => {
   const ticketsNodes = tickets.slice(0, maxViewTickets).map((ticket: TicketType) => {
-    const infoTicket = ticket.segments[0];
-    const id = createIdForTicket(infoTicket.date, infoTicket.duration);
     return (
-      <li key={id} className={classes.ticket}>
+      <li key={uniqid()} className={classes.ticket}>
         <Ticket ticket={ticket} />
       </li>
     );
@@ -62,6 +61,9 @@ const TicketsListContainer: FC<Props> = ({
   useEffect(() => {
     getTickets();
   }, []);
+  useEffect(() => {
+    incViewTickets(5);
+  }, [tabs, checkedCheckboxes]);
   let filtredTickets = tickets;
   const activeTab = tabs.reduce((id: number, tab) => {
     if (tab.isActive) id += tab.id;
@@ -71,6 +73,13 @@ const TicketsListContainer: FC<Props> = ({
     filtredTickets = tickets.filter((item) => item.segments[0].stops.length === stopsId);
   });
   if (activeTab) sortingTickets(activeTab, filtredTickets);
+  const handleClick = () => incViewTickets();
+  const btn =
+    checkedCheckboxes.length > 0 ? (
+      <button className={classesTabs.btn && classes.btnLong} onClick={handleClick}>
+        Показать еще 5 билетов
+      </button>
+    ) : null;
   const spinner =
     loading && !errorStatus ? (
       <Box sx={{ width: '100%' }}>
@@ -82,16 +91,14 @@ const TicketsListContainer: FC<Props> = ({
   ) : (
     <TicketsList tickets={filtredTickets} maxViewTickets={countTickets} />
   );
-  // const errorMessage = errorStatus ? (
-  //   <Alert type="error" message="Возникла ошибка! Попробуйте перезагрузить страницу" />
-  // ) : null;
+  const errorMessage = errorStatus ? (
+    <Alert type="error" message="Возникла ошибка при загрузке билетов! Попробуйте перезагрузить страницу" />
+  ) : null;
   return (
     <div className={classes.container}>
-      {spinner}
+      {spinner || errorMessage}
       {viewTickets}
-      <button className={classesTabs.btn && classes.btnLong} onClick={incViewTickets}>
-        Показать еще 5 билетов
-      </button>
+      {btn}
     </div>
   );
 };
