@@ -17,10 +17,6 @@ export function arrivalTimeCalculation(date: string, duration: number): string {
   return `${formatTime(arrivedTime.getHours())}:${formatTime(arrivedTime.getMinutes())}`;
 }
 
-export function createIdForTicket(date: string, duration: number): number {
-  return new Date(date).getTime() + duration;
-}
-
 export function sortingTickets(idActiveTab: number, tickets: TicketType[]) {
   if (idActiveTab === 1) return tickets.sort(sortByPrice);
   if (idActiveTab === 2) return tickets.sort(sortByDuration);
@@ -39,6 +35,7 @@ export function sortByDuration(a: TicketType, b: TicketType) {
 }
 
 export function sortOptimal(a: TicketType, b: TicketType) {
+  //найти среднее и сравнивать по нему
   const durationA = a.segments[0].duration;
   const durationB = b.segments[0].duration;
   if (durationA > durationB && a.price > b.price) return 1;
