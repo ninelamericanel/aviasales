@@ -23,19 +23,18 @@ export function sortingTickets(idActiveTab: number, tickets: TicketType[]) {
   if (idActiveTab === 3) return tickets.sort(sortOptimal);
 }
 
-export function sortByPrice(a: TicketType, b: TicketType) {
+function sortByPrice(a: TicketType, b: TicketType) {
   if (a.price > b.price) return 1;
   return -1;
 }
-export function sortByDuration(a: TicketType, b: TicketType) {
+function sortByDuration(a: TicketType, b: TicketType) {
   const durationA = a.segments[0].duration;
   const durationB = b.segments[0].duration;
   if (durationA > durationB) return 1;
   return -1;
 }
 
-export function sortOptimal(a: TicketType, b: TicketType) {
-  //найти среднее и сравнивать по нему
+function sortOptimal(a: TicketType, b: TicketType) {
   const durationA = a.segments[0].duration;
   const durationB = b.segments[0].duration;
   if (durationA > durationB && a.price > b.price) return 1;
