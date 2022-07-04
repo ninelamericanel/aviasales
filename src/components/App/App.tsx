@@ -3,7 +3,7 @@ import 'antd/dist/antd.css';
 
 import { Tabs } from 'components/Tabs';
 import { Filter } from 'components/Filter';
-import { TicketsList } from 'components/TicketsList';
+import { TicketsListContainer } from 'components/TicketsList';
 
 import classes from './App.module.scss';
 import logo from './Logo.png';
@@ -19,7 +19,7 @@ const App: FC = () => {
       <main className={classes.main}>
         <Tabs />
         <Filter />
-        <TicketsList />
+        <TicketsListContainer />
       </main>
     </div>
   );

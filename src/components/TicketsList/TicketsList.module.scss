@@ -1,7 +1,11 @@
 @import "./src/variable";
 
-.list {
-  grid-area: l;
+.container {
+  grid-area: l
+}
+
+.list, .container {
+  //grid-area: l;
 
   display: flex;
   flex-direction: column;
@@ -20,7 +24,7 @@
 
 .btnLong {
   grid-area: b;
-
+  width: 100%;
   height: 50px;
   background-color: $activeColor;
   color: $activeColorFont;
