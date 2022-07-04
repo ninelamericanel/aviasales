@@ -2,10 +2,8 @@ import React, { FC, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
 
-import { CheckboxType, ObjectTickets, StateType } from 'types';
+import { CheckboxType, StateType } from 'types';
 import * as actions from 'store/actionCreators';
-// import * as thunks from 'store/thunks';
-// import { getSearchId } from 'services/ticketServices';
 
 import classes from './Filter.module.scss';
 import burger from './burger.svg';
@@ -19,8 +17,6 @@ interface Props {
   checkboxAll: boolean;
   unCheck: (id: number) => void;
   unCheckAutomatic: () => void;
-  // getTickets: (searchId: string, stops: number[]) => void;
-  tickets: ObjectTickets;
 }
 
 const Filter: FC<Props> = ({
@@ -32,20 +28,12 @@ const Filter: FC<Props> = ({
   checkboxAll,
   check,
   checkAll,
-  // getTickets,
 }) => {
-  // const sendRequest = () => {
-  //   getSearchId().then((result) => {
-  //     getTickets(result.searchId, isChecked);
-  //   });
-  // };
-
   useEffect(() => {
     const allCheckboxIsActive = isChecked.length === checkboxes.length;
     if (allCheckboxIsActive) {
       checkAutomatic();
     }
-    // if (isChecked.length > 0) sendRequest();
   }, [isChecked]);
 
   useEffect(() => {
@@ -104,10 +92,8 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
     unCheckActionCreator,
     unCheckAutomatic,
   } = bindActionCreators(actions, dispatch);
-  // const { getTicketsThunk } = bindActionCreators(thunks, dispatch);
   return {
     check: (id: number) => checkActionCreator(id),
-    // getTickets: (searchId: string, stops: number[]) => getTicketsThunk(searchId, stops),
     unCheck: (id: number) => unCheckActionCreator(id),
     checkAll: checkAllActionCreator,
     checkAutomatic: checkAutomaticActionCreator,
