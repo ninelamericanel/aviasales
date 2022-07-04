@@ -12,7 +12,7 @@ interface Props {
   isChecked: number[];
   checkboxes: CheckboxType[];
   check: (id: number) => void;
-  checkAll: (array: [] | number[], statusForCheckbox: boolean) => void;
+  checkAll: (array: number[], statusForCheckbox: boolean) => void;
   checkAutomatic: () => void;
   checkboxAll: boolean;
   unCheck: (id: number) => void;
@@ -87,8 +87,8 @@ const mapStateToProps = (state: StateType) => {
 const mapDispatchToProps = (dispatch: Dispatch) => {
   const { check, checkAll, checkAutomatic, unCheck, unCheckAutomatic } = bindActionCreators(actions, dispatch);
   return {
-    check: (id: number) => check(id),
-    unCheck: (id: number) => unCheck(id),
+    check: check,
+    unCheck: unCheck,
     checkAll: checkAll,
     checkAutomatic: checkAutomatic,
     unCheckAutomatic: unCheckAutomatic,

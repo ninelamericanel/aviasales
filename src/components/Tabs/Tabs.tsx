@@ -39,7 +39,7 @@ const mapStateToProps = (state: StateType) => {
 const mapDispatchToProps = (dispatch: Dispatch) => {
   const { setTab } = bindActionCreators(actions, dispatch);
   return {
-    setTab: (id: number) => setTab(id),
+    setTab: setTab,
   };
 };
 
