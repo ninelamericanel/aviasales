@@ -8,9 +8,9 @@ export interface InitialStateType {
 }
 
 const initialState: InitialStateType = {
-  isChecked: [],
+  isChecked: [0],
   checkboxes: [
-    { id: 0, name: 'Без пересадок', isChecked: false },
+    { id: 0, name: 'Без пересадок', isChecked: true },
     { id: 1, name: '1 пересадка', isChecked: false },
     { id: 2, name: '2 пересадки', isChecked: false },
     { id: 3, name: '3 пересадки', isChecked: false },
