@@ -75,7 +75,7 @@ const TicketsListContainer: FC<Props> = ({
   if (activeTab) sortingTickets(activeTab, filtredTickets);
   const handleClick = () => incViewTickets();
   const btn =
-    checkedCheckboxes.length > 0 ? (
+    checkedCheckboxes.length > 0 && tickets.length > 0 ? (
       <button className={classesTabs.btn && classes.btnLong} onClick={handleClick}>
         Показать еще 5 билетов
       </button>
