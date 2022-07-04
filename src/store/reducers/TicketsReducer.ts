@@ -31,7 +31,7 @@ const TicketsReducer = (state = initialState, action: Action) => {
     case ActionType.INC_VIEW_TICKETS: {
       return {
         ...state,
-        countTicketsView: state.countTicketsView + 5,
+        countTicketsView: action.count ? action.count : state.countTicketsView + 5,
       };
     }
     case ActionType.SET_LOADER:

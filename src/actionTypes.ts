@@ -17,6 +17,7 @@ export enum ActionType {
 
 interface ActionIncViewTickets {
   type: ActionType.INC_VIEW_TICKETS;
+  count?: number;
 }
 
 interface ActionCheck {
