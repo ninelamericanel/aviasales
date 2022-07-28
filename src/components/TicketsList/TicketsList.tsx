@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react';
+import React, { FC, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Alert, Spin } from 'antd';
 import Box from '@mui/material/Box';
@@ -130,4 +130,8 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(TicketsListContainer);
+// const compareProps = (prevProps, nextProps) => {
+//   prevProps.tickets.
+// }
+
+export default connect(mapStateToProps, mapDispatchToProps)(React.memo(TicketsListContainer));

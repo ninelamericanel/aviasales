@@ -5,7 +5,6 @@ import { Provider } from 'react-redux';
 import { composeWithDevTools } from '@redux-devtools/extension';
 import thunk from 'redux-thunk';
 
-import './reset.scss';
 import './normalize.scss';
 import { App } from './components/App';
 import reducer from './store/reducers/reducer';

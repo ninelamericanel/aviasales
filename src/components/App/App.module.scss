@@ -43,3 +43,16 @@ body {
   }
 }
 
+button {
+  font-family: inherit;
+  font-weight: inherit;
+  padding: 0;
+  border: none;
+  outline: none;
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  background-color: inherit;
+}
+
